@@ -1,7 +1,7 @@
-const usersAccountController = require('../controllers/users-account-controller');
+
 
 module.exports = (router, commonRouter, authRouter) => {
-  commonRouter.get('/user', usersAccountController.userLogIn);
-  commonRouter.post('/user', usersAccountController.userSignIn);
-  authRouter.put('/user/:id', usersAccountController.userUpdate);
+  commonRouter.get('/user', )
+  commonRouter.post('/user', )
+  authRouter.put('/user', )
 }

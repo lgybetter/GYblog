@@ -1,7 +1,7 @@
 {
   "name": "blog-new",
   "version": "1.0.0",
-  "description": "blog new version",
+  "description": "lgy blog new version",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,7 +9,7 @@
   "keywords": [
     "blog"
   ],
-  "author": "lgybetter && Fon",
+  "author": "lgybetter",
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.5.0",
@@ -21,13 +21,6 @@
     "jsonwebtoken": "^7.3.0",
     "mongoose": "^4.8.5",
     "morgan": "^1.8.1",
-    "nconf": "^0.8.4",
-    "request": "^2.80.0"
-  },
-  "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^3.2.0",
-    "nodemon": "^1.11.0",
-    "supertest": "^3.0.0"
+    "nconf": "^0.8.4"
   }
 }

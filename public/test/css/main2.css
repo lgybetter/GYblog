@@ -1,0 +1,91 @@
+body {
+    background-color: #000000;
+    background-image: url("../image/background.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+h1 {
+    font-size: 60px;
+    text-align: center;
+    color: white;
+}
+
+#hr_short {
+    width: 200px;
+    height: 5px;
+    border: none;
+    background-color: #00db8b;
+}
+
+#hr_long {
+    border: none;
+    width: 80%;
+    height: 2px;
+    background-color: white;
+}
+
+h2 {
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    opacity: 0.6;
+}
+
+h3 {
+    font-size: 40px;
+    text-align: center;
+    color: #000000;
+    opacity: 0.6;
+}
+
+p {
+    font-size: 15px;
+    color: #000000;
+    margin-left: 30px;
+    width: 80%;
+}
+
+#title_div {
+    margin-top: 500px;
+    text-align: center;
+    margin-top: 800px;
+}
+
+.button_style {
+    width: 200px;
+    height: 60px;
+    background-color: #00db8b;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    color: white;
+    outline: none;
+    position: relative;
+    top: 250px;
+}
+
+.button_style:hover {
+    background-color: #3fff7a;
+}
+
+.button_style:active {
+    background-color: #008f5b;
+}
+
+#float_box {
+    float: left;
+    width: 1000px;
+    height: 600px;
+    position: absolute;
+    top: 800px;
+    left: 50%;
+}
+
+#Article_box {
+    float: left;
+    width: 300px;
+    height: 400px;
+    margin: 52px;
+    background-color: white;
+}

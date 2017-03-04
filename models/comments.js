@@ -6,7 +6,7 @@ const CommentsSchema = new Schema({
   refPost: { type: Schema.Types.ObjectId, ref: 'Posts' },
   from: { type: Schema.Types.ObjectId, ref: 'Users' },
   to: { type: Schema.Types.ObjectId, ref: 'Users' },
-  createAt: { type: Date, default: Date.now }
+  createAt: { type: Date, default: Date.now() }
 });
 
 const Comments = mongoose.model('Comments', CommentsSchema);

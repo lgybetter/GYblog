@@ -10,6 +10,7 @@ class CURD {
   }
 
   create(data) {
+    console.log(data)
     return new this.model(data).save();
   }
 

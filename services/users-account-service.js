@@ -31,17 +31,17 @@ const verifyUser = (data) => {
   let email = data.email;
   let password = data.password;
   return new CURD(Users).query({ email: email }).then(user => {
-    if(!user) {
+    if(!user[0]) {
       return Promise.reject({ code: 301, msg: 'user not sign in' });
     }
-    if(user.password === password) {
+    if(user[0].password === password) {
       let token = jwt.sign({ 
         user: JSON.parse(JSON.stringify(user)), exp: Date.now() 
       }, nconf.get('secret'))
       return Promise.resolve({ 
         code: 200, 
         msg: 'login success', 
-        user: user, 
+        user: user[0], 
         token: token 
       });
     } else {

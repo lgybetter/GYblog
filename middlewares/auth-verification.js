@@ -16,7 +16,7 @@ module.exports = (req, res, next) => {
   }
   co(function* () {
     yield verify(token, nconf.get('secret')).then(decoded => {
-      req.user = JSON.parse(decoded.user);
+      req.user = decoded.user;
       next();
     }).catch(err => {
       res.status(401).end();

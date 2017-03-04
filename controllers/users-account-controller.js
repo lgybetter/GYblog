@@ -44,8 +44,9 @@ exports.userSignIn = (req, res, next) => {
 exports.userUpdate = (req, res, next) => {
   let data = req.body || {};
   let id = req.params.id || {};
+  console.log(req.body)
   co(function* () {
-    let status = yield userAccountService.updateUser({ _id: id }, data).catch(err => {
+    let status = yield userAccountService.updateUser(id, data).catch(err => {
       next(err);
     });
     res.json({ status: status, success: true });

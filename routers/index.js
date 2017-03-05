@@ -10,7 +10,7 @@ class RouterIndex {
      */
     this._authRouter.use(authVerification);
     require('./users-account-router')(this._router, this._commonRouter, this._authRouter);
-    // require('./posts-router')(this._router, this._commonRouter, this._authRouter);
+    require('./posts-router')(this._router, this._commonRouter, this._authRouter);
   }
 
   /**

@@ -10,18 +10,24 @@ class RouterIndex {
      */
     this._authRouter.use(authVerification);
     require('./users-account-router')(this._router, this._commonRouter, this._authRouter);
-    require('./posts-router')(this._router, this._commonRouter, this._authRouter);
+    // require('./posts-router')(this._router, this._commonRouter, this._authRouter);
   }
 
-  // 资源路由
+  /**
+   * 资源路由 
+   */
   router() {
     return this._router;
   }
-  // 鉴权路由
+  /**
+   * 鉴权路由
+   */
   authRouter() {
     return this._authRouter;
   }
-  // 普通路由
+  /**
+   * 普通路由
+   */
   commonRouter() {
     return this._commonRouter;
   }

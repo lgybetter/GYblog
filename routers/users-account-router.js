@@ -1,4 +1,4 @@
-
+const usersAccountController = require('../controllers/users-account-controller');
 
 module.exports = (router, commonRouter, authRouter) => {
   commonRouter.get('/user', usersAccountController.userLogIn);

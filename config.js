@@ -15,5 +15,5 @@ if(CNF_PATH) {
   //export NODE_ENV=production && node index.js
   nconf.env();
   const NODE_ENV = nconf.get('NODE_ENV') || 'development';
-  module.exports = require(`__dirname/config.${NODE_ENV}.js`);
+  module.exports = require(`${__dirname}/config.${NODE_ENV}.js`);
 }

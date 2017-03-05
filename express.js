@@ -12,6 +12,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
 const routerIndex = new RouterIndex(express);
 app.use('/', routerIndex.router());
 app.use('/api', routerIndex.commonRouter());

@@ -21,6 +21,10 @@ class CURD {
     return this.model.remove(conditions);
   }
 
+  findOne(conditions) {
+    return this.model.findOne(conditions);
+  }
+
 }
 
 module.exports = CURD;

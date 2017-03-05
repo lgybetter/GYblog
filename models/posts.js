@@ -6,6 +6,7 @@ const PostsSchema = new Schema({
   createBy: { type: Schema.Types.ObjectId, ref: 'Users' },
   createAt: { type: Date, default: Date.now },
   content: { type: String, required: true },
+  open: { type: Boolean, required: true },
   tags: [{ type: Schema.Types.ObjectId, ref: 'Tags' }]
 });
 

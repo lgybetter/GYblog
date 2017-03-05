@@ -20,8 +20,13 @@ const queryUsers = () => {
 }
 
 const findUser = (id) => {
-  return new CURD(Users).query({ _id: id }).then(user => {
-    return Promise.resolve(user[0]);
+  return new CURD(Users).findOne({ _id: id });
+}
+
+const starPost = (postId, user) => {
+  return new CURD(Users).findOne(user).then(user => {
+    user.starPost.push(postId);
+    return user.save();
   });
 }
 
@@ -30,5 +35,11 @@ module.exports = {
   removeUser,
   updateUser,
   queryUsers,
+<<<<<<< HEAD
   findUser
+=======
+  findUser,
+  verifyUser,
+  starPost
+>>>>>>> finish the post controller
 }

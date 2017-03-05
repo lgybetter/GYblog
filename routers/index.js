@@ -9,7 +9,8 @@ class RouterIndex {
      * 路由编写
      */
     this._authRouter.use(authVerification);
-    require('./users-account-router')(_router, _commonRouter, _authRouter);
+    require('./users-account-router')(this._router, this._commonRouter, this._authRouter);
+    require('./posts-router')(this._router, this._commonRouter, this._authRouter);
   }
 
   // 资源路由

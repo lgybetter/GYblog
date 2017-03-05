@@ -26,7 +26,7 @@ describe('用户登录', () => {
 
 
 describe('用户发布文章', () => {
-  it('用用户发表文章成功', done => {
+  it('用户发表文章成功', done => {
     let option = {
       url: `${config.baseUrl}/api/auth/post`,
       headers: {
@@ -36,7 +36,7 @@ describe('用户发布文章', () => {
         title: 'test',
         open: true,
         createBy: id,
-        content: 'test',
+        content: 'test'
       },
       json: true
     }

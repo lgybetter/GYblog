@@ -1,9 +1,13 @@
 const mongoose = require('mongoose');
 const Posts = 'Posts';
+const markdown = require('markdown').markdown;
 const CURD = require('./curd-service');
 const Promise = require('bluebird');
 
 const createPost = (data) => {
+  //把内容转换为MD格式
+  data.content = markdown.toHTML(data.content, 'Maruku');
+  console.log(data.content);
   return new CURD(Posts).create(data);
 }
 

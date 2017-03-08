@@ -3,11 +3,11 @@
     <div class="half-view">
       <div class="sign-in-container">
         <div class="sign-in-form-container" v-show="state">
-          <p>User Name</p>
-            <input type="text" class="text-box" />
-            <p>Password</p>
-            <input type="password" class="text-box" />
-            <input type="button" class="sign-button" value="Sign In"/>
+          <p>User Email</p>
+          <input type="email" class="text-box" v-model="user.email"/>
+          <p>Password</p>
+          <input type="password" class="text-box" v-model="user.password"/>
+          <input type="button" class="sign-button" value="Sign In" @click="userSignIn()"/>
         </div>
         <div class="text-container" v-show="!state">
           <h1>GY BLOG</h1>
@@ -18,14 +18,14 @@
       <div class="sign-up-container">
         <div class="sign-up-form-container" v-show="!state">
           <p>E-mail Address</p>
-          <input type="text" class="text-box" />
+          <input type="email" class="text-box" v-model="user.email"/>
           <p>Nick Name</p>
-          <input type="text" class="text-box" />
+          <input type="text" class="text-box" v-model="user.name"/>
           <p>Password</p>
-          <input type="password" class="text-box" />
+          <input type="password" class="text-box" v-model="user.password"/>
           <p>Confirm Password</p>
-          <input type="password" class="text-box" />
-          <input type="button" class="sign-button" value="Sign Up" />
+          <input type="password" class="text-box" v-model="user.confirmPassword"/>
+          <input type="button" class="sign-button" value="Sign Up" @click="userSignUp()"/>
         </div>
         <div class="text-container" v-show="state">
           <h1>GY BLOG</h1>
@@ -41,22 +41,43 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
-  name: 'hello',
+  name: 'auth',
   data () {
     return {
-      state: true
+      state: true,
+      user: {
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+      }
     }
   },
   methods: {
+    ...mapActions(['signIn', 'signUp']),
     changeState () {
       this.state = !this.state
+    },
+    userSignIn () {
+      this.signIn({ user: this.user })
+    },
+    userSignUp () {
+      if (this.user.confirmPassword === this.user.password) {
+        this.signUp({ user: this.user })
+      } else {
+        console.log('请确认密码')
+      }
     }
   }
 }
 </script>
 
 <style lang="scss">
+@import '../assets/sass/animation';
+
 .auth-view {
   width: 100%;
   height: 100%;
@@ -206,6 +227,7 @@ export default {
   @extend .change-button;
   background-color: rgb(22, 22, 22);
 }
+
 @-webkit-keyframes alphaChange {
   from {
       opacity: 0;

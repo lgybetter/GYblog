@@ -1,3 +1,3 @@
-require('./nconf');
-require('./mongoose');
-require('./express');
+require('./nconf')
+require('./mongoose')
+require('./express')

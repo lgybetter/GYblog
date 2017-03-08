@@ -24,7 +24,8 @@
     "mongoose": "^4.8.5",
     "morgan": "^1.8.1",
     "nconf": "^0.8.4",
-    "npm": "^4.3.0"
+    "npm": "^4.3.0",
+    "vue-resource": "^1.2.1"
   },
   "devDependencies": {
     "babel-core": "^6.23.1",

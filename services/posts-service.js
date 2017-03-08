@@ -7,7 +7,6 @@ const Promise = require('bluebird');
 const createPost = (data) => {
   //把内容转换为MD格式
   data.content = markdown.toHTML(data.content, 'Maruku');
-  console.log(data.content);
   return new CURD(Posts).create(data);
 }
 
@@ -23,12 +22,16 @@ const removePost = (id, user) => {
 }
 
 const queryPosts = (filter, sort, skip) => {
-  return new CURD(Posts).query(Object.assign(filter)).skip(skip).sort(sort);
+  return new CURD(Posts).query(Object.assign(filter)).populate({
+    'path': 'tags comments'
+  }).skip(skip).sort(sort);
 }
 
 const findPost = (id, user) => {
   return new CURD(Posts).findOne({
     _id: id,
+  }).populate({
+    'path': 'tags comments'
   }).then(post => {
     if(post.createBy === user._id) {
       return Promise.resolve(post)

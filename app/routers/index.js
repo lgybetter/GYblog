@@ -1,19 +1,13 @@
 import VueRouter from 'vue-router';
-import login from '../pages/login';
-import signin from '../pages/signin';
+import auth from '../pages/auth';
 import home from '../pages/home';
 
 const router = new VueRouter({
   routes: [
     {
-      name: 'login',
+      name: 'auth',
       path: '/',
-      component: login,
-    },
-    {
-      name: 'signin',
-      path: '/signin',
-      component: signin
+      component: auth,
     },
     {
       name: 'home',

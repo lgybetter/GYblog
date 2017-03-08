@@ -7,7 +7,8 @@ const PostsSchema = new Schema({
   createAt: { type: Date, default: Date.now },
   content: { type: String, required: true },
   open: { type: Boolean, required: true },
-  tags: [{ type: Schema.Types.ObjectId, ref: 'Tags' }]
+  tags: [{ type: Schema.Types.ObjectId, ref: 'Tags' }],
+  comments: [{ type: Schema.Types.ObjectId, ref: 'Comments' }]
 });
 
 const Posts = mongoose.model('Posts', PostsSchema);

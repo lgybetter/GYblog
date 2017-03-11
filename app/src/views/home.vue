@@ -1,7 +1,7 @@
 <template>
   <div class="home-view">
     <div class="information-box">
-      <navigator :navigations="navigations"></navigator>
+      <navigator :user="user"></navigator>
       <informationsContainer :infomation="infomation"></informationsContainer>
     </div>
     <div class="article-stack-view">
@@ -22,8 +22,23 @@ import thumbUpIcon from '../assets/images/ic_thumb_up_black_24dp_1x.png'
 import chatIcon from '../assets/images/ic_chat_black_24dp_1x.png'
 import starIcon from '../assets/images/ic_star_black_24dp_1x.png'
 import shareIcon from '../assets/images/ic_share_black_24dp_1x.png'
+import { mapGetters, mapActions } from 'vuex'
+import * as types from '../store/mutation-types'
 
 export default {
+  computed: {
+    ...mapGetters(['user'])
+  },
+  methods: {
+    ...mapActions([types.QUERY_POSTS])
+  },
+  created () {
+    if (this.user.token) {
+      this[types.QUERY_POSTS]({user: this.user}).then(body => {
+        console.log(body)
+      })
+    }
+  },
   components: {
     navigator,
     informationsContainer,
@@ -31,7 +46,6 @@ export default {
   },
   data () {
     return {
-      navigations: ['Setting', 'Followers', 'Likes', 'Personal', 'Publish', 'Sign In'],
       infomation: {
         picture: headPicture,
         title: 'Fucking Man',

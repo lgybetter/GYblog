@@ -5,5 +5,13 @@ export default {
       'Content-Type': 'application/json'
     }
   },
-  baseUrl: '/api'
+  tokenOptions: (token) => {
+    return {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    }
+  },
+  baseUrl: '/api',
+  authUrl: '/api/auth'
 }

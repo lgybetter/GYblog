@@ -4,9 +4,9 @@
       <div class="sign-in-container">
         <div class="sign-in-form-container" v-show="state">
           <p>User Email</p>
-          <input type="email" class="text-box" v-model="user.email"/>
+          <input type="email" class="text-box" v-model="userForm.email"/>
           <p>Password</p>
-          <input type="password" class="text-box" v-model="user.password"/>
+          <input type="password" class="text-box" v-model="userForm.password"/>
           <input type="button" class="sign-button" value="Sign In" @click="userSignIn()"/>
         </div>
         <div class="text-container" v-show="!state">
@@ -18,13 +18,13 @@
       <div class="sign-up-container">
         <div class="sign-up-form-container" v-show="!state">
           <p>E-mail Address</p>
-          <input type="email" class="text-box" v-model="user.email"/>
+          <input type="email" class="text-box" v-model="userForm.email"/>
           <p>Nick Name</p>
-          <input type="text" class="text-box" v-model="user.name"/>
+          <input type="text" class="text-box" v-model="userForm.name"/>
           <p>Password</p>
-          <input type="password" class="text-box" v-model="user.password"/>
+          <input type="password" class="text-box" v-model="userForm.password"/>
           <p>Confirm Password</p>
-          <input type="password" class="text-box" v-model="user.confirmPassword"/>
+          <input type="password" class="text-box" v-model="userForm.confirmPassword"/>
           <input type="button" class="sign-button" value="Sign Up" @click="userSignUp()"/>
         </div>
         <div class="text-container" v-show="state">
@@ -41,14 +41,18 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
+import * as types from '../store/mutation-types'
 
 export default {
   name: 'auth',
+  computed: {
+    ...mapGetters(['user'])
+  },
   data () {
     return {
       state: true,
-      user: {
+      userForm: {
         name: '',
         email: '',
         password: '',
@@ -57,22 +61,22 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['signIn', 'signUp']),
+    ...mapActions([types.SIGN_IN, types.SIGN_UP]),
     changeState () {
       this.state = !this.state
     },
     userSignIn () {
-      this.signIn({ user: this.user }).then(body => {
+      this[types.SIGN_IN]({ user: this.userForm }).then(body => {
         if (body.status.code === 200) {
-          this.$router.replace({ path: '/home' })
+          this.$router.replace({ path: '/' })
         } else {
           console.log('登录失败')
         }
       })
     },
     userSignUp () {
-      if (this.user.confirmPassword === this.user.password) {
-        this.signUp({ user: this.user })
+      if (this.userForm.confirmPassword === this.userForm.password) {
+        this[types.SIGN_IN]({ user: this.userForm })
       } else {
         console.log('请确认密码')
       }

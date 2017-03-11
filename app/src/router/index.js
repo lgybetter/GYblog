@@ -9,13 +9,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'auth',
-      component: auth
-    },
-    {
-      path: '/home',
       name: 'home',
       component: home
+    },
+    {
+      path: '/auth',
+      name: 'auth',
+      component: auth
     }
   ]
 })

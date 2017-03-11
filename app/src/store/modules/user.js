@@ -1,4 +1,4 @@
-import auth from '../../api/auth'
+import auth from '../api/auth'
 
 const state = {
   user: JSON.parse(localStorage.getItem('user')) || {}

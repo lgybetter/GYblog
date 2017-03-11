@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import config from '../store/config'
+import config from '../config'
 
 export default {
   signUp (user) {

@@ -1,5 +1,5 @@
 <template>
-  <div class="auth-view">
+  <div class="container">
     <div class="half-view">
       <div class="sign-in-container">
         <div class="sign-in-form-container" v-show="state">
@@ -62,7 +62,13 @@ export default {
       this.state = !this.state
     },
     userSignIn () {
-      this.signIn({ user: this.user })
+      this.signIn({ user: this.user }).then(body => {
+        if (body.status.code === 200) {
+          this.$router.replace({ path: '/home' })
+        } else {
+          console.log('登录失败')
+        }
+      })
     },
     userSignUp () {
       if (this.user.confirmPassword === this.user.password) {
@@ -76,164 +82,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../assets/sass/animation';
-
-.auth-view {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-}
-
-.half-view {
-  @extend .auth-view;
-  display: flex;
-  flex-direction: row;
-}
-
-.sign-container {
-  @extend .auth-view;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  .text-container {
-    text-align: center;
-    margin: 30% 20%;
-    -webkit-animation: alphaChange 2.5s;
-    h1 {
-      font-size: 40px;
-      cursor: default;
-    }
-    p {
-      font-size: 25px;
-      cursor: default;
-    }
-  }
-}
-
-.sign-up-container {
-  @extend .sign-container;
-  background-color: rgb(0, 219, 139);
-  h1 {
-    color: #000000;
-    font-size: 40px;
-    cursor: default;
-  }
-  p {
-    color: #000000;
-    font-size: 25px;
-    cursor: default;
-  }
-}
-
-.sign-in-container {
-  @extend .sign-container;
-  background-color: rgb(22, 22, 22);
-  h1 {
-    color: #ffffff;
-    font-size: 40px;
-    cursor: default;
-  }
-  p {
-    color: #ffffff;
-    font-size: 25px;
-    cursor: default;
-  }
-}
-
-.form-container {
-  text-align: center;
-  width: 400px;
-  -webkit-animation: alphaChange 2.5s;
-  .text-box {
-    width: 300px;
-    height: 50px;
-    font-size: 20px;
-    border: 0;
-    border-radius: 5px;
-    outline: none;
-    text-indent: 10px;
-  }
-  p {
-    font-size: 20px;
-    cursor: default;
-  }
-  .sign-button {
-    width: 300px;
-    height: 50px;
-    margin-top: 50px;
-    border-radius: 5px;
-    border: 0;
-    outline: none;
-    font-size: 25px;
-  }
-}
-
-.sign-up-form-container {
-  @extend .form-container;
-  p {
-    color: #000000;
-  }
-  .sign-button {
-    background-color: rgb(22, 22, 22);
-    color: #ffffff;
-    &:active {
-       background-color: #000000;
-    }
-  }
-}
-
-.sign-in-form-container {
-  @extend .form-container;
-  p {
-    color: #ffffff;
-  }
-  .sign-button {
-    background-color: rgb(0, 219, 139);
-    color: #000000;
-    &:active {
-      background-color: #008f5b;
-    }
-  }
-}
-
-.change-button {
-  text-align: center;
-  line-height: 75px;
-  width: 150px;
-  height: 150px;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  margin: auto;
-  -webkit-transform: rotate(45deg);
-  overflow: hidden;
-  cursor: pointer;
-  p {
-    font-size: 35px;
-    color: #ffffff;
-    -webkit-transform: rotate(-45deg);
-    -webkit-animation: alphaChange 2.5s;
-  }
-}
-
-.change-button-sign-in {
-  @extend .change-button;
-  background-color: rgb(0, 219, 139);
-}
-
-.change-button-sign-up {
-  @extend .change-button;
-  background-color: rgb(22, 22, 22);
-}
-
-@-webkit-keyframes alphaChange {
-  from {
-      opacity: 0;
-  }
-  to {
-      opacity: 1;
-  }
-}
+@import '../assets/styles/auth.scss';
 </style>

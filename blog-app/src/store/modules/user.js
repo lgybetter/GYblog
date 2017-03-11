@@ -1,4 +1,4 @@
-import auth from '../api/auth'
+import auth from '../../api/auth'
 
 const state = {
   user: JSON.parse(localStorage.getItem('user')) || {}
@@ -11,12 +11,12 @@ const getters = {
 const actions = {
   signIn ({ commit }, { user }) {
     return auth.signIn(user).then(res => {
-      console.log(res.body)
+      return Promise.resolve(res.body)
     })
   },
   signUp ({ commit }, { user }) {
     return auth.signUp(user).then(res => {
-      console.log(res.body)
+      return Promise.resolve(res.body)
     })
   }
 }

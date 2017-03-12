@@ -1,9 +1,8 @@
-const mongoose = require('mongoose');
-const Comments = 'Comments';
-const CURD = require('./curd-service');
-const Promise = require('bluebird');
-const usersAccountService = require('./users-account-service');
-const postService = require('./posts-service');
+const mongoose = require('mongoose')
+const Comments = mongoose.model('Comments')
+const Promise = require('bluebird')
+const usersAccountService = require('./users-account-service')
+const postService = require('./posts-service')
 
 const addComment = (postId, fromUser, comment) => {
   let _post = {};
@@ -16,9 +15,9 @@ const addComment = (postId, fromUser, comment) => {
         }
       });
     }
-    return new CURD(Comments).create(Object.assign(comment, { 
+    return new Comments(Object.assign(comment, { 
       from: fromUser 
-    }));
+    })).save()
   }).then(comment => {
     _post.comments.push(comment._id);
     return _post.save();

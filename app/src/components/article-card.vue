@@ -11,10 +11,10 @@
       </div>
     </div>
     <div class="article-box-navigation">
-      <div><img :src="icons.thumb"><p>{{article.thumbUpCount}}</p></div>
-      <div><img :src="icons.chat"><p>{{article.comments.length}}</p></div>
-      <div><img :src="icons.star"><p>{{article.starCount}}</p></div>
-      <div><img :src="icons.share"><p>{{article.shareCount}}</p></div>
+      <div @click="postEvents('thumbUp')"><img :src="icons.thumb"><p>{{article.thumbUpCount}}</p></div>
+      <div @click="postEvents('comments')"><img :src="icons.chat"><p>{{article.comments.length}}</p></div>
+      <div @click="postEvents('star')"><img :src="icons.star"><p>{{article.starCount}}</p></div>
+      <div @click="postEvents('share')"><img :src="icons.share"><p>{{article.shareCount}}</p></div>
     </div>
   </div>
 </template>
@@ -25,13 +25,36 @@ import thumbUpIcon from '../assets/images/ic_thumb_up_black_24dp_1x.png'
 import chatIcon from '../assets/images/ic_chat_black_24dp_1x.png'
 import starIcon from '../assets/images/ic_star_black_24dp_1x.png'
 import shareIcon from '../assets/images/ic_share_black_24dp_1x.png'
+import { mapActions, mapGetters } from 'vuex'
+import * as types from '../store/mutation-types'
 
 export default {
+  computed: {
+    ...mapGetters(['user'])
+  },
   props: {
     article: {
       type: Object,
       default () {
         return {}
+      }
+    },
+    index: {
+      type: Number,
+      default () {
+        return 0
+      }
+    }
+  },
+  methods: {
+    ...mapActions([types.POST_EVENTS]),
+    postEvents (event) {
+      if (event === 'comments') {
+        this.$router.replace({ path: '/auth' })
+      } else {
+        this[types.POST_EVENTS]({ user: this.user, post: this.article, event: event, index: this.index }).then(body => {
+          console.log(body)
+        })
       }
     }
   },

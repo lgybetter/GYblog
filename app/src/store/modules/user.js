@@ -1,4 +1,4 @@
-import auth from '../api/auth'
+import authApi from '../api/authApi'
 import * as types from '../mutation-types'
 
 const state = {
@@ -11,15 +11,15 @@ const getters = {
 
 const actions = {
   [types.SIGN_IN] ({ commit }, { user }) {
-    return auth.signIn(user).then(res => {
+    return authApi.signIn(user).then(res => {
       localStorage.setItem('user', JSON.stringify(res.body.status))
       commit(types.SIGN_IN, { user: res.body.status })
-      return Promise.resolve(res.body)
+      return Promise.resolve(res)
     })
   },
   [types.SIGN_UP] ({ commit }, { user }) {
-    return auth.signUp(user).then(res => {
-      return Promise.resolve(res.body)
+    return authApi.signUp(user).then(res => {
+      return Promise.resolve(res)
     })
   },
   [types.SIGN_OUT] ({ commit }) {

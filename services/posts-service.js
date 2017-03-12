@@ -1,61 +1,53 @@
-const mongoose = require('mongoose');
-const Posts = 'Posts';
-const Users = 'Users';
-const markdown = require('markdown').markdown;
-const CURD = require('./curd-service');
-const Promise = require('bluebird');
+const mongoose = require('mongoose')
+const Posts = mongoose.model('Posts')
+const Users = mongoose.model('Users')
+const markdown = require('markdown').markdown
+const Promise = require('bluebird')
 
 /**
  * 用户发表文章
  */
 const createPost = (data) => {
   //把内容转换为MD格式
-  data.content = markdown.toHTML(data.content, 'Maruku');
-  return new CURD(Posts).create(data);
+  data.content = markdown.toHTML(data.content, 'Maruku')
+  return new Posts(data).save()
 }
 
 /**
  * 用户修改文章
  */
 const updatePost = (id, user, data) => {
-  return new CURD(Posts).update({ 
+  return Posts.update({ 
     _id: id,
     createBy: user._id
-  }, data);
+  }, data)
 }
 
 /**
  * 用户删除文章
  */
 const removePost = (id, user) => {
-  return new CURD(Posts).remove({ _id: id, user: user._id });
+  return Posts.remove({ _id: id, user: user._id })
 }
 
 /**
  * 用户获取文章
  */
 const queryPosts = (filter, sort, skip) => {
-  return new CURD(Posts).query(Object.assign(filter)).populate({
+  return Posts.find(Object.assign(filter)).populate({
     'path': 'tags comments'
-  }).skip(skip).sort(sort);
+  }).skip(skip).sort(sort)
 }
 
 /**
  * 用户查找单篇文章
  */
 const findPost = (id, user) => {
-  return new CURD(Posts).findOne({
-    _id: id
+  return Posts.findOne({
+    _id: id,
+    createBy: user._id
   }).populate({
     'path': 'tags comments'
-  }).then(post => {
-    if(post.createBy === user._id) {
-      return Promise.resolve(post)
-    } else if(post.open) {
-      return Promise.resolve(post)
-    } else {
-      return Promise.reject( {code: 401, msg: 'not access' });
-    }
   })
 }
 
@@ -78,32 +70,28 @@ const postEvents = (id, user, event, method) => {
       let countEvent = `${event}Count`
       let postEvent = '${event}Posts'
       if(method === 'PUT') {
-        return new CURD(Posts).update({ 
+        let update = {}
+        update['$inc'] = {}
+        update['$inc'][countEvent] = 1
+        return Posts.findOneAndUpdate({ 
           _id: id
-        }, {
-          $inc: { 
-            countEvent: 1
-          }
-        }).then(() => {
-          return new CURD(Users).update({ _id: user._id}, {
-            $addToSet: {
-              postEvent: id
-            }
-          })
+        }, update).then(() => {
+          let update = {}
+          update['$addToSet'] = {}
+          update['$addToSet'][postEvent] = id
+          return Users.findOneAndUpdate({ _id: user._id}, update)
         })
       } else if(method === 'DELETE') {
-        return new CURD(Posts).update({
+        let update = {}
+        update['$inc'] = {}
+        update['$inc'][countEvent] = -1
+        return Posts.findOneAndUpdate({
           _id: id
-        }, {
-          $inc: {
-            countEvent: 1
-          }
-        }).then(() => {
-          return new CURD(Users).update({ _id: user._id }, {
-            $pull: {
-              postEvent: id
-            }
-          })
+        }, update).then(() => {
+          let update = {}
+          update['$pull'] = {}
+          update['$pull'][postEvent] = id
+          return Users.findOneAndUpdate({ _id: user._id }, update)
         })
       } else {
         return Promise.reject({code: 400, msg: 'operation fail'})

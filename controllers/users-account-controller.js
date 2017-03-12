@@ -11,6 +11,7 @@ const jwt = require('jsonwebtoken');
  */
 exports.userLogIn = (req, res, next) => {
   let data = req.query || {};
+  console.log(data)
   co(function* () {
     let status = yield userAccountService.verifyUser(data).catch(err => {
       next(err);

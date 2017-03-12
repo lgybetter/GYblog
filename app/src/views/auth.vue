@@ -66,17 +66,21 @@ export default {
       this.state = !this.state
     },
     userSignIn () {
-      this[types.SIGN_IN]({ user: this.userForm }).then(body => {
-        if (body.status.code === 200) {
+      this[types.SIGN_IN]({ user: this.userForm }).then(res => {
+        if (res.status === 200) {
           this.$router.replace({ path: '/' })
         } else {
-          console.log('登录失败')
+          this.state = !this.state
         }
       })
     },
     userSignUp () {
       if (this.userForm.confirmPassword === this.userForm.password) {
-        this[types.SIGN_IN]({ user: this.userForm })
+        this[types.SIGN_UP]({ user: this.userForm }).then(res => {
+          if (res.status === 200) {
+            this.state = !this.state
+          }
+        })
       } else {
         console.log('请确认密码')
       }

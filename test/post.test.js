@@ -10,7 +10,7 @@ let posts = [];
 describe('用户登录', () => {
   it('用户登陆成功', done => {
     let option = {
-      url: `${config.baseUrl}/api/user?email=437675103@qq.com&password=lgy`,
+      url: `${config.baseUrl}/api/user?email=437675103@qq.com&password=123`,
       json: true
     }
     request.get(option, (err, res, body) => {
@@ -111,7 +111,7 @@ describe('用户查找文章', () => {
       done();
     })
   })
-    it('根据id修改文章', done => {
+  it('根据id修改文章', done => {
     let option = {
       url: `${config.baseUrl}/api/auth/post/${posts[0]._id}`,
       headers: {
@@ -125,7 +125,7 @@ describe('用户查找文章', () => {
       },
       json: true
     }
-    request.del(option, (err, res, body) => {
+    request.put(option, (err, res, body) => {
       expect(err).to.be.equal(null);
       expect(res.statusCode).to.be.equal(200);
       expect(body.success).to.be.equal(true);

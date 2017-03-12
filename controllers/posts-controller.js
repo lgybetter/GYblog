@@ -44,7 +44,7 @@ exports.viewAllPosts = (req, res, next) => {
   let sort = req.query.sort || {};
   let perPage = req.query.perPage || 10;
   let page = req.query.page || 1;
-  let skip = parseInt((page - 1) * perPage);
+  let skip = parseInt((page - 1) * perPage) || 0;
   filter = Object.assign(filter, { open: true });
   co(function* () {
     let posts = yield postService.queryPosts(filter, sort, skip).catch(err => {
@@ -107,10 +107,13 @@ exports.removePost = (req, res, next) => {
  * 用户操作文章事件
  */
 exports.postEvents = (req, res, next) => {
-  let event = req.query.event || ''
+  let event = req.body.event || ''
   let id = req.params.id || ''
   let user = req.user || {};
   co(function* () {
-      yield postService.postEvents(id, user, event, req.method)
+    let status = yield postService.postEvents(id, user, event, req.method).catch(err => {
+      next(err)
+    })
+    res.json({ status: status, success: true })
   })
 }

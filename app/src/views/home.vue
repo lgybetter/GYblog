@@ -5,8 +5,8 @@
       <informationsContainer :infomation="user.user"></informationsContainer>
     </div>
     <div class="article-stack-view">
-      <template v-for="post in posts">
-        <articleCard :article="post"></articlecard>
+      <template v-for="(post, index) in posts">
+        <articleCard :article="post" :index="index"></articlecard>
       </template>
     </div>
   </div>

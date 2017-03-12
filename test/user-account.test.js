@@ -13,7 +13,7 @@ describe('用户注册', () => {
       body: {
         email: '437675103@qq.com',
         name: 'lgybetter',
-        password: 'lgy'
+        password: '123'
       },
       json: true
     }
@@ -29,7 +29,7 @@ describe('用户注册', () => {
 describe('用户登录', () => {
   it('用户登陆成功', done => {
     let option = {
-      url: `${config.baseUrl}/api/user?email=437675103@qq.com&password=lgy`,
+      url: `${config.baseUrl}/api/user?email=437675103@qq.com&password=123`,
       json: true
     }
     request.get(option, (err, res, body) => {

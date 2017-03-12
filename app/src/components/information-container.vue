@@ -1,16 +1,17 @@
 <template>
   <div class="information-box-container">
     <div class="information-picture-box">
-      <img :src="infomation.picture"/>
+      <img :src="information || icon"/>
     </div>
     <div class="information-introduction">
-      <h1>{{infomation.title}}</h1>
-      <p>{{infomation.content}}</p>
+      <h1>{{infomation.name}}</h1>
+      <p>{{infomation.introduction || 'This user is lazy, nothing left'}}</p>
     </div>
   </div>
 </template>
 
 <script>
+import headPicture from '../assets/images/head-picture.jpg'
 
 export default {
   props: {
@@ -19,6 +20,11 @@ export default {
       default () {
         return {}
       }
+    }
+  },
+  data () {
+    return {
+      icon: headPicture
     }
   }
 }

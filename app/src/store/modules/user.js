@@ -30,7 +30,7 @@ const actions = {
 
 const mutations = {
   [types.SIGN_IN] (state, { user }) {
-    state.user = user
+    state.user = user || {}
   },
   [types.SIGN_OUT] (state) {
     state.user = {}

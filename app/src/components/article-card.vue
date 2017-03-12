@@ -2,23 +2,29 @@
   <div class="article-box">
     <div class="article-box-container">
       <div class="image-box">
-        <img :src="article.picture"/>
+        <img :src="articlePricture"/>
       </div>
       <div class="article-text-box">
         <h1>{{article.title}}</h1>
-        <h2>{{article.date}}</h2>
+        <h2>{{article.createAt}}</h2>
         <p>{{article.content}}</p>
       </div>
     </div>
     <div class="article-box-navigation">
-      <template v-for="icon in article.icons">
-        <div><img :src="icon.src"><p>{{icon.text}}</p></div>
+      <template v-for="(value, index) in icons">
+        <div><img :src="value"><p>{{datas[index]}}</p></div>
       </template>
     </div>
   </div>
 </template>
 
 <script>
+import articlePricture from '../assets/images/article-image.jpg'
+import thumbUpIcon from '../assets/images/ic_thumb_up_black_24dp_1x.png'
+import chatIcon from '../assets/images/ic_chat_black_24dp_1x.png'
+import starIcon from '../assets/images/ic_star_black_24dp_1x.png'
+import shareIcon from '../assets/images/ic_share_black_24dp_1x.png'
+
 export default {
   props: {
     article: {
@@ -26,6 +32,23 @@ export default {
       default () {
         return {}
       }
+    }
+  },
+  data () {
+    return {
+      icons: [
+        thumbUpIcon,
+        chatIcon,
+        starIcon,
+        shareIcon
+      ],
+      datas: [
+        '123',
+        '32',
+        '34',
+        '87'
+      ],
+      articlePricture: articlePricture
     }
   }
 }

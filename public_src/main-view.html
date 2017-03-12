@@ -1,13 +1,39 @@
 <html>
 
+
 <head>
     <link rel="stylesheet" href="css/main-view.css" type="text/css">
+    <script src="../jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
 </head>
 
 <body>
     <div class="main-view-div">
-        <div class="information-box">
-            <div class="navigation">
+        <div class="navigation-column" id="navigation-column">
+            <div>
+                <img src="image/ic_arrow_back_white_36dp_1x.png">
+            </div>
+            <div>
+                <img src="image/ic_mode_edit_white_36dp_1x.png">
+            </div>
+            <div>
+                <img src="image/ic_person_white_36dp_1x.png">
+            </div>
+            <div class="information-box-push-button" id="information-box-push-button">
+                <img src="image/ic_last_page_white_36dp_1x.png">
+            </div>
+            <div>
+                <img src="image/ic_star_white_36dp_1x.png">
+            </div>
+            <div>
+                <img src="image/ic_favorite_white_36dp_1x.png">
+            </div>
+            <div>
+                <img src="image/ic_settings_white_36dp_1x.png">
+            </div>
+        </div>
+        <div class="information-box" id="information-box">
+            <div class="navigation" id="navigation">
                 <div>
                     <p>Setting</p>
                 </div>
@@ -27,13 +53,13 @@
                     <p>Sign In</p>
                 </div>
             </div>
-            <div class="information-box-container">
+            <div class="information-box-container" id="information-box-container">
                 <div class="user-head-picture-box">
                     <img src="image/head-picture.jpg">
                 </div>
                 <div class="user-introduction">
                     <h1>Fucking Man</h1>
-                    <p>
+                    <p id="information-text">
                         My son, when he was 4 years old began to show great interest in the English word ‘audlt video’ after he had watched the public-interest advertisement of on CCTV1.
                     </p>
                 </div>
@@ -199,5 +225,6 @@
         </div>
     </div>
 </body>
+
 
 </html>

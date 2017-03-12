@@ -76,7 +76,6 @@ body {
     /* 垂直居中 */
     justify-content: center;
     /* 水平居中 */
-    -webkit-animation: widthChange 1.5s;
     overflow: hidden;
     /*display: none;*/
 }

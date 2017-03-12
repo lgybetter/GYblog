@@ -11,9 +11,10 @@
       </div>
     </div>
     <div class="article-box-navigation">
-      <template v-for="(value, index) in icons">
-        <div><img :src="value"><p>{{datas[index]}}</p></div>
-      </template>
+      <div><img :src="icons.thumb"><p>{{article.thumbUpCount}}</p></div>
+      <div><img :src="icons.chat"><p>{{article.comments.length}}</p></div>
+      <div><img :src="icons.star"><p>{{article.starCount}}</p></div>
+      <div><img :src="icons.share"><p>{{article.shareCount}}</p></div>
     </div>
   </div>
 </template>
@@ -36,18 +37,12 @@ export default {
   },
   data () {
     return {
-      icons: [
-        thumbUpIcon,
-        chatIcon,
-        starIcon,
-        shareIcon
-      ],
-      datas: [
-        '123',
-        '32',
-        '34',
-        '87'
-      ],
+      icons: {
+        thumb: thumbUpIcon,
+        chat: chatIcon,
+        star: starIcon,
+        share: shareIcon
+      },
       articlePricture: articlePricture
     }
   }

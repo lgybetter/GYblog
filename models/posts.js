@@ -7,8 +7,12 @@ const PostsSchema = new Schema({
   createAt: { type: Date, default: Date.now },
   content: { type: String, required: true },
   open: { type: Boolean, required: true },
+  summary: { type: String },
   tags: [{ type: Schema.Types.ObjectId, ref: 'Tags' }],
-  comments: [{ type: Schema.Types.ObjectId, ref: 'Comments' }]
+  comments: [{ type: Schema.Types.ObjectId, ref: 'Comments' }],
+  starCount: { type: Number },
+  shareCount: { type: Number },
+  thumbUpCount: { type: Number }
 });
 
 const Posts = mongoose.model('Posts', PostsSchema);

@@ -16,7 +16,6 @@
 import navigator from '../components/navigator'
 import informationsContainer from '../components/information-container'
 import articleCard from '../components/article-card'
-import headPicture from '../assets/images/head-picture.jpg'
 
 import { mapGetters, mapActions } from 'vuex'
 import * as types from '../store/mutation-types'
@@ -41,13 +40,7 @@ export default {
     articleCard
   },
   data () {
-    return {
-      infomation: {
-        picture: headPicture,
-        title: 'Fucking Man',
-        content: 'My son, when he was 4 years old began to show great interest in the English word ‘audlt video’ after he had watched the public-interest advertisement of on CCTV1.'
-      }
-    }
+    return {}
   }
 }
 

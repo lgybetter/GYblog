@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const Users = 'Users';
 const nconf = require('nconf');
 const CURD = require('./curd-service');

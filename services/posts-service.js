@@ -66,30 +66,50 @@ const findPost = (id, user) => {
  *  user: 当前的用户
  *  event: 对文章的操作事件: addComments, star, share, thumbUp
  *  type: 对文章操作事件的类型: add, remove
+ *  method: 对文章操作事件的类型: PUT, DELETE
  */
-const postCountEvents = (id, user, event, type) => {
+const postEvents = (id, user, event, method) => {
   switch(event) {
     case 'comments':
+      return Promise.resolve()
     case 'star':
     case 'share':
     case 'thumbUp':
       let countEvent = `${event}Count`
       let postEvent = '${event}Posts'
-      return new CURD(Posts).update({ 
-        _id: id
-      },{
-        $inc: { 
-          countEvent: 1
-        }
-      }).then(() => {
-        return new CURD(Users).update({ _id: user._id}, {
-          $addToSet: {
-            postEvent: id
+      if(method === 'PUT') {
+        return new CURD(Posts).update({ 
+          _id: id
+        }, {
+          $inc: { 
+            countEvent: 1
           }
+        }).then(() => {
+          return new CURD(Users).update({ _id: user._id}, {
+            $addToSet: {
+              postEvent: id
+            }
+          })
         })
-      })
-    default: 
-      return Promise.resolve()
+      } else if(method === 'DELETE') {
+        return new CURD(Posts).update({
+          _id: id
+        }, {
+          $inc: {
+            countEvent: 1
+          }
+        }).then(() => {
+          return new CURD(Users).update({ _id: user._id }, {
+            $pull: {
+              postEvent: id
+            }
+          })
+        })
+      } else {
+        return Promise.reject({code: 400, msg: 'operation fail'})
+      }
+    default:
+      return Promise.reject({code: 400, msg: 'operation fail'})
   }
 }
 
@@ -98,5 +118,6 @@ module.exports = {
   updatePost,
   removePost,
   queryPosts,
-  findPost
+  findPost,
+  postEvents
 }

@@ -93,12 +93,24 @@ exports.updatePost = (req, res, next) => {
  * 根据id删除文章
  */
 exports.removePost = (req, res, next) => {
-  let id = req.params.id || '';
-  let user = req.user || {};
+  let id = req.params.id || ''
+  let user = req.user || {}
   co(function* () {
     let status = yield postService.removePost(id, user).catch(err => {
-      next(err);
-    });
-    res.json({ status: status, success: true });
+      next(err)
+    })
+    res.json({ status: status, success: true })
+  })
+}
+
+/**
+ * 用户操作文章事件
+ */
+exports.postEvents = (req, res, next) => {
+  let event = req.query.event || ''
+  let id = req.params.id || ''
+  let user = req.user || {};
+  co(function* () {
+      yield postService.postEvents(id, user, event, req.method)
   })
 }

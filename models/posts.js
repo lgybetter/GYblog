@@ -10,9 +10,9 @@ const PostsSchema = new Schema({
   summary: { type: String },
   tags: [{ type: Schema.Types.ObjectId, ref: 'Tags' }],
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comments' }],
-  starCount: { type: Number },
-  shareCount: { type: Number },
-  thumbUpCount: { type: Number }
+  starCount: { type: Number, default: 0 },
+  shareCount: { type: Number, default: 0 },
+  thumbUpCount: { type: Number, default: 0 }
 });
 
 const Posts = mongoose.model('Posts', PostsSchema);

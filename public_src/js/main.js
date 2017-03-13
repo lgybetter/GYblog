@@ -13,4 +13,12 @@ $(document).ready(function() {
         $("#navigation").show();
         $("#navigation-column").animate({ width: '0' }, 200)
     })
+    $("#navigation-column-push-button").click(function() {
+        $("#information-box").animate({ width: '0' })
+        $("#navigation").animate({ width: '0' })
+        $("#information-box-container").hide();
+        $("#navigation").hide();
+        $("#navigation-column").animate({ width: '60px' }, 1000);
+
+    });
 });

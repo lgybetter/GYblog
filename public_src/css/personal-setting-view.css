@@ -1,0 +1,42 @@
+html {
+    font-size: 62.5%;
+    overflow-x: unset;
+}
+
+body {
+    margin: 0;
+}
+
+.body-container {
+    padding: 0;
+    background-image: url('../image/background.jpg');
+    background-repeat: repeat;
+    background-attachment: fixed;
+    position: absolute;
+}
+
+.text-view-container {
+    width: 1000px;
+    margin: 100px auto;
+    text-align: center;
+}
+
+.text-view-container div {
+    margin: 30px 0;
+}
+
+.text-view-container div>p {
+    font-size: 2rem;
+    color: #fff;
+    display: inline;
+    margin-right: 10px;
+}
+
+.text-box {
+    width: 800px;
+    height: 40px;
+    font-size: 2rem;
+    text-indent: 5px;
+    border-radius: 5px;
+    outline: none;
+}

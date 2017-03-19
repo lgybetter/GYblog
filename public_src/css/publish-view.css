@@ -75,10 +75,11 @@ body {
     margin: 0;
     font-size: 2rem;
     font-family: "微软雅黑";
-    text-indent: 5px;
+    padding: 10px;
     border-radius: 5px;
     outline: none;
     border: 2px inset rgb(126, 126, 126);
+    resize: none;
 }
 
 .publish-view-container .label-view {

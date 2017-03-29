@@ -63,8 +63,9 @@ export default {
 <style lang="scss">
 
 .navigation {
-  width: 40%;
-  height: 6rem;
+  width: 30%;
+  min-width: 400px;
+  height: 60px;
   position: fixed;
   top: 0;
   left: 0;
@@ -74,20 +75,20 @@ export default {
   justify-content: space-between;
   background-color: rgb(0, 219, 139);
   div {
-    width: 10rem;
-    height: 5.5rem;
-    font-size: 1.6rem;
+    width: 100px;
+    height: 55px;
+    font-size: 1.4rem;
     font-weight: bold;
     color: #fff;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 0.5rem solid transparent;
+    border-bottom: 5px solid transparent;
   }
   div:hover {
     color: #008f5b;
-    border-bottom: 0.5rem solid #008f5b;
+    border-bottom: 5px solid #008f5b;
   }
 }
 

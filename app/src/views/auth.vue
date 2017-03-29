@@ -33,9 +33,9 @@
           </p>
         </div>
       </div>
-    </div>
-    <div @click=changeState v-bind:class="{'change-button-sign-in': !state, 'change-button-sign-up': state}">
+      <div @click=changeState v-bind:class="{'change-button-sign-in': !state, 'change-button-sign-up': state}">
         <p id="change-button-text">{{{'true':'Sign Up', 'false':'Sing In'}[state.toString()]}}</p>
+      </div>
     </div>
   </div>
 </template>

@@ -75,45 +75,65 @@ export default {
 <style lang="scss">
 
 .article-box {
-  width: 68rem;
-  height: 30rem;
+  width: 680px;
+  height: 300px;
   margin: 0;
   display: flex;
   flex-direction: row;
-  margin-top: 4rem;
+  margin-top: 40px;
   .article-box-container {
-    width: 62rem;
-    height: 30rem;
+    width: 620px;
+    height: 300px;
     background-color: rgb(0, 219, 139);
     display: flex;
     flex-direction: row;
-    box-shadow: 1rem 1rem 2rem #000;
+    box-shadow: 10px 10px 20px #000;
     cursor: pointer;
     user-select: none;
     .image-box {
-      width: 30rem;
-      height: 30rem;
+      width: 300px;
+      height: 300px;
       img {
         width: 100%;
       }
     }
     .article-text-box {
-      width: 32rem;
-      height: 30rem;
+      width: 320px;
+      height: 300px;
       h1 {
-        font-size: 3.5rem;
+        font-size: 3.6rem;
         font-weight: bold;
-        margin: 2rem 2rem 0 2rem;
+        width: 280px;
+        height: 60px;
+        line-height: 60px;
+        margin: 10px 20px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       h2 {
-        font-size: 2rem;
+        font-size: 1.6rem;
         font-weight: bold;
         color: rgb(117, 117, 117);
-        margin: 0.5rem 2rem 0 2rem;
+        width: 280px;
+        height: 30px;
+        line-height: 30px;
+        margin: 10px 20px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       p {
-        font-size: 2rem;
-        margin: 0.5rem 2rem 0 2rem;
+        font-size: 1.6rem;
+        width: 280px;
+        height: 150px;
+        line-height: 25px;
+        margin: 10px 20px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 6;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
   }
@@ -126,8 +146,8 @@ export default {
     justify-content: space-between;
     box-shadow: 1rem 1rem 2rem #000;
     div {
-      width: 5rem;
-      height: 7.5rem;
+      width: 50px;
+      height: 75px;
       background-color: rgb(0, 219, 139);
       display: flex;
       flex-direction: column;
@@ -136,7 +156,7 @@ export default {
       user-select: none;
     }
     p {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       margin: 0;
       cursor: default;
     }

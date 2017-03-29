@@ -4,11 +4,12 @@
 .half-view {
   @extend .container;
   display: flex;
+  position: relative;
   flex-direction: row;
 }
 
 .sign-container {
-  @extend .container;
+  width: 50%;
   display: flex;
   align-items: center;
   justify-content: center;

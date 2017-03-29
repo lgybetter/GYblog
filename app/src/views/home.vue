@@ -1,13 +1,15 @@
 <template>
-  <div class="home-view">
+  <div class="container home-view">
     <div class="information-box">
       <navigator :user="user"></navigator>
       <informationsContainer :infomation="user.user"></informationsContainer>
     </div>
-    <div class="article-stack-view">
-      <template v-for="(post, index) in posts">
-        <articleCard :article="post" :index="index"></articlecard>
-      </template>
+    <div class="article-layout">
+      <div class="article-stack-view">
+        <template v-for="(post, index) in posts">
+          <articleCard :article="post" :index="index"></articlecard>
+        </template>
+      </div>
     </div>
   </div>
 </template>

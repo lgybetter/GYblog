@@ -95,4 +95,5 @@ body {
     font-family: "微软雅黑";
     padding: 10px;
     resize: none;
+    border: 2px inset;
 }

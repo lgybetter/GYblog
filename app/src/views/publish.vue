@@ -4,34 +4,27 @@
     </navgatorcolumn>
     <div class="publish-view-container">
       <div class="title-submit-box">
-        <input type="text" class="title-text" />
+        <input type="text" class="title-text"/>
         <input type="submit" value="Publish" class="publish-view-container-button publish-view-container-button-background-color"/>
       </div>
       <textarea class="text-box"></textarea>
       <div class="label-view">
-        <input id="first-label" type="button" class="publish-view-container-button label-selector label-first-box" value="First label"/>
-        <input id="second-label" type="button" class="publish-view-container-button label-selector label-second-box" value="Second label"/>
-        <input id="third-label" type="button" class="publish-view-container-button label-selector label-third-box" value="Third label"/>
+        <template v-for="(label, index) in labels">
+          <input @click="selectLabel(index)" :value="label.text" type="button" :class="['publish-view-container-button', 'label-selector', label.style]"/>
+        </template>
       </div>
     </div>
-    <div id="alert-box" class="alert-box">
+    <div class="alert-box" v-show="selectFlag">
       <div class="label-topic"></div>
       <div class="label-box-container">
-        <div class="label-option">
-          <p>JavaScript</p>
-        </div>
-        <div class="label-option">
-          <p>PHP</p>
-        </div>
-        <div class="label-option">
-          <p>C++</p>
-        </div>
-        <div class="label-option">
-          <p>Java</p>
-        </div>
+        <template v-for="labelOption in labelOptions">
+          <div class="label-option" @click="checkLabel(labelOption)">
+            <p>{{labelOption}}</p>
+          </div>
+        </template>
       </div>
     </div>
-    <div class="shelter-box"></div>
+    <div class="shelter-box" v-show="selectFlag" @click="selectLabel"></div>
   </div>
 </template>
 
@@ -41,6 +34,40 @@ import navgatorColumn from '../components/navigator-column'
 export default {
   components: {
     navgatorColumn
+  },
+  data () {
+    return {
+      labels: [
+        {
+          text: 'First label',
+          style: 'label-first-box'
+        },
+        {
+          text: 'Second label',
+          style: 'label-second-box'
+        },
+        {
+          text: 'Third label',
+          style: 'label-third-box'
+        }
+      ],
+      selectFlag: false,
+      labelOptions: [
+        'JavaScript',
+        'PHP',
+        'C++',
+        'Java'
+      ]
+    }
+  },
+  methods: {
+    selectLabel (index) {
+      this.selectFlag = !this.selectFlag
+    },
+    checkLabel (label) {
+      console.log(label)
+      this.selectFlag = !this.selectFlag
+    }
   }
 }
 

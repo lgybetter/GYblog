@@ -9,7 +9,7 @@ class BaseResource {
     this.listQuery = null 
   }
 
-  queryParams({ query }) {
+  queryParams({ query, user }) {
     //当前的所在页面
     this.page = query._page
     //每一页需要多少条数据
@@ -54,14 +54,14 @@ class BaseResource {
     this.listQuery = this.Model.find(this.filters).select(this.selectField).limit(this.limit).skip(this.skip).sort(this.sort) 
   }
 
-  async execQuery({ query }) {
-    this.queryParams({ query })
-    this.query() 
+  async execQuery({ query, user }) {
+    this.queryParams({ query, user })
+    this.query({ query, user }) 
     try {
       let result = await Promise.all([this.Model.count(this.filters), this.listQuery]) 
       return {
         count: result[0],
-        objects: result[1].map(this.mongoIdToWebId)
+        objects: result[1].map(this._mongoIdToWebId)
       }
     } catch (err) {
       throw new Error({ code: 500, msg: err, level: 'error', expect: [] }) 
@@ -69,65 +69,65 @@ class BaseResource {
   }
 
   // 创建实体的实例
-  async create({ body }) {
+  async create({ body, user }) {
     let data = body 
     let entity = new this.Model(data) 
     try {
       await entity.save() 
-      return this.mongoIdToWebId(entity) 
+      return this._mongoIdToWebId(entity) 
     } catch (err) {
       throw new Error({ code: 500, msg: err, level: 'error' }) 
     }
   }
 
   // 查找实例
-  async findById({ params, query }) {
-    this.queryParams({ query }) 
+  async findById({ params, query, user }) {
+    this.queryParams({ query, user }) 
     let id = params.id 
     try {
       let entity = await this.Model.findById(id).select(this.selectField) 
       if (!entity) {
         throw new Error('not found') 
       }
-      return this.mongoIdToWebId(entity) 
+      return this._mongoIdToWebId(entity) 
     } catch (err) {
       throw new Error({ code: 500, msg: err, level: 'error' }) 
     }
   }
 
   // 更新实例
-  async findByIdAndUpdate({ params, body, query }) {
+  async findByIdAndUpdate({ params, body, query, user }) {
     let id = params.id 
-    let data = body 
-    this.queryParams({ query })     
+    let data = body
+    this.queryParams({ query, user })     
     try {
       let entity = await this.Model.findByIdAndUpdate(id, data).select(this.selectField) 
       if (!entity) {
         throw new Error('not found') 
       }
-      return this.mongoIdToWebId(entity)
+      return this._mongoIdToWebId(entity)
     } catch (err) {
       throw new Error({ code: 500, msg: err, level: 'error' }) 
     }
   }
 
   // 删除实例
-  async findByIdAndRemove({ params, query }) {
+  async findByIdAndRemove({ params, query, user }) {
     let id = params.id 
-    this.queryParams({ query })     
+    this.queryParams({ query, user })     
     try {
       let entity = await this.Model.findByIdAndRemove(id).select(this.selectField) 
       if (!entity) {
         throw new Error('not found') 
       }
-      return this.mongoIdToWebId(entity) 
+      return this._mongoIdToWebId(entity) 
     } catch (err) {
       throw new Error({ code: 500, msg: err, level: 'error' }) 
     }
   }
 
   // 将mongo对象转化为js对象
-  mongoIdToWebId (entity) {
+  _mongoIdToWebId (entity) {
     let o = entity.toObject() 
     o.id = o._id.toString() 
     delete o._id 

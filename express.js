@@ -1,10 +1,10 @@
-const express = require('express');
-const cors = require('cors');
-const morgan = require('morgan');
-const bodyParser = require('body-parser');
-const path = require('path');
-const nconf = require('nconf');
-const RouterIndex = require('./routers');
+import express from 'express'
+import cors from 'cors'
+import morgan from 'morgan'
+import bodyParser from 'body-parser'
+import path from 'path'
+import nconf from 'nconf'
+import RouterIndex from './routers'
 const app = express();
 app.use(morgan('dev'));
 app.use(cors());

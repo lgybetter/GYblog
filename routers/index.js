@@ -1,4 +1,4 @@
-const authVerification = require('../middlewares/auth-verification')
+import { vertifyToken } from '../middlewares/auth-verification'
 
 class RouterIndex {
   constructor(express) {
@@ -8,9 +8,9 @@ class RouterIndex {
     /**
      * 路由编写
      */
-    this._authRouter.use(authVerification);
+    this._authRouter.use(vertifyToken);
     require('./users-account-router')(this._router, this._commonRouter, this._authRouter);
-    require('./posts-router')(this._router, this._commonRouter, this._authRouter);
+    require('./post-router')(this._router, this._commonRouter, this._authRouter);
   }
 
   /**

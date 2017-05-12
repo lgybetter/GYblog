@@ -1,7 +1,7 @@
 'use strict';
-const config = require('./config');
-const nconf = require('nconf');
+import config from './config'
+import nconf from 'nconf'
 
-nconf.overrides(config);
+nconf.overrides(config)
 
-module.exports = nconf;
+export default nconf

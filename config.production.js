@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   port: 3001,
   mongodb: 'mongodb://localhost/blog',
   host: '127.0.0.1',

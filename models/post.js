@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const PostsSchema = new Schema({
+const PostSchema = new Schema({
   title: { type: String, required: true },
   createBy: { type: Schema.Types.ObjectId, ref: 'Users' },
   createAt: { type: Date, default: Date.now },
@@ -15,6 +15,6 @@ const PostsSchema = new Schema({
   thumbUpCount: { type: Number, default: 0 }
 });
 
-const Posts = mongoose.model('Posts', PostsSchema);
+const Post = mongoose.model('Post', PostSchema);
 
-module.exports = Posts;
+module.exports = Post;

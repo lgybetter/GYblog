@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import mongoose from 'mongoose'
+const Schema = mongoose.Schema
 
 const UsersSchema = new Schema({
   name: { type: String, unique: true, required: true },
@@ -7,12 +7,9 @@ const UsersSchema = new Schema({
   introduction: { type: String },
   email: { type: String, unique: true, required: true },
   password: { type: String, required: true },
-  createAt: { type: Date, default: Date.now() }, 
-  starPosts: [{ type: Schema.Types.ObjectId, ref: 'Post' }], //收藏的文章
-  thumbUpPosts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
-  sharePosts: [{ type: Schema.Types.ObjectId, ref: 'Post' }]
-});
+  createAt: { type: Date, default: Date.now() }
+})
 
-const Users = mongoose.model('Users', UsersSchema);
+const Users = mongoose.model('Users', UsersSchema)
 
-module.exports = Users;
+export default Users

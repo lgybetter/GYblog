@@ -60,7 +60,7 @@ class ResourceCtrl {
   // 创建实体的实例
   async create(req, res, next) {
     try {
-      let data = await this.resourceService.create({ body: req.body, user: req.user }) 
+      let data = await this.resourceService.create({ body: req.body, user: req.user,  }) 
       res.json(data) 
     } catch (err) {
       next(err) 
@@ -90,7 +90,7 @@ class ResourceCtrl {
   // 删除实例
   async findByIdAndRemove(req, res, next) {
     try {
-      let data = await this.resourceService.findByIdAndRemove({ params: req.params, query: req.query, user: req.user }) 
+      let data = await this.resourceService.findByIdAndRemove({ params: req.params, body: req.body, query: req.query, user: req.user }) 
       res.json(data) 
     } catch (err) {
       next(err) 

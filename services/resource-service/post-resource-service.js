@@ -6,7 +6,7 @@ class PostResource extends BaseResource {
     this.filters = Object.assign(this.filters, { "$or": [{ open: true }, { createBy: user._id }]})
     this.listQuery = this.Model.find(this.filters).select(this.selectField).populate({ path: 'tags comments' }).select(this.selectField).limit(this.limit).skip(this.skip).sort(this.sort)
   }
-  
+
   async create ({ body, user }) {
     let data = body
     data.createBy = user._id

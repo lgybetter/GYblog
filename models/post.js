@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose'
 const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
@@ -13,8 +13,8 @@ const PostSchema = new Schema({
   shareCount: { type: Number, default: 0 },
   viewCount: { type: Number, default: 0},
   thumbUpCount: { type: Number, default: 0 }
-});
+})
 
-const Post = mongoose.model('Post', PostSchema);
+const Post = mongoose.model('Post', PostSchema)
 
-module.exports = Post;
+export default Post

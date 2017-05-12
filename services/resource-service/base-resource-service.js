@@ -112,7 +112,7 @@ class BaseResource {
   }
 
   // 删除实例
-  async findByIdAndRemove({ params, query, user }) {
+  async findByIdAndRemove({ params, query, user, body }) {
     let id = params.id 
     this.queryParams({ query, user })     
     try {

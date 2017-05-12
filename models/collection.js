@@ -1,13 +1,12 @@
 import mongoose from 'mongoose'
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
-const CommentSchema = new Schema({
-  title: { type: String, require: true },
+const CollectionSchema = new Schema({
   createBy: { type: Schema.Types.ObjectId, ref: 'Users' },
   postId: { type: Schema.Types.ObjectId, ref: 'Post'},
   createAt: { type: Date, default: Date.now }
 })
 
-const Comment = mongoose.model('Comment', CommentSchema)
+const Collection = mongoose.model('Collection', CollectionSchema)
 
-export default Comment
+export default Collection

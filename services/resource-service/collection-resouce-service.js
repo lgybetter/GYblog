@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 const Post = mongoose.model('Post')
 const User = mongoose.model('Users')
 
-class CommontResource extends BaseResource {
+class CollectionResource extends BaseResource {
   query ({ user }) {
     this.filters = this.filters || {}
     this.filters = Object.assign(this.filters, { createBy: user._id })
@@ -14,6 +14,10 @@ class CommontResource extends BaseResource {
     let data = body
     if (!data.postId) {
       throw new Error({ code: 400, msg: 'required postId', level: 'error' })       
+    }
+    let _post = await this.Model.findOne({ createBy: user._id, postId: data.postId })
+    if (_post) {
+      throw new Error({ code: 400, msg: 'have collected', level: 'error' })       
     }
     data.createBy = user._id
     let entity = new this.Model(data)
@@ -30,8 +34,11 @@ class CommontResource extends BaseResource {
     let postId = body.postId
     this.queryParams({ query, user })     
     try {
-      await Post.findByIdAndUpdate(data.postId, { '$inc': { starCount: -1 } })
+      console.log('kkk')
+      await Post.findByIdAndUpdate(data.postId, { '$inc': { "starCount": -1 } })
+      console.log('123')
       let entity = await this.Model.findOneAndRemove({ postId: id, createBy: user._id }).select(this.selectField) 
+      console.log('fff')
       if (!entity) {
         throw new Error('not found') 
       }
@@ -42,4 +49,4 @@ class CommontResource extends BaseResource {
   }
 }
 
-export default CommontResource
+export default CollectionResource

@@ -10,7 +10,7 @@ class RouterIndex {
      */
     this._authRouter.use(vertifyToken);
     require('./users-account-router')(this._router, this._commonRouter, this._authRouter);
-    require('./post-router')(this._router, this._commonRouter, this._authRouter);
+    require('./resource-router')(this._router, this._commonRouter, this._authRouter);
   }
 
   /**

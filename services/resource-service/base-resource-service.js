@@ -71,7 +71,7 @@ class BaseResource {
   // 创建实体的实例
   async create({ body, user }) {
     let data = body 
-    let entity = new this.Model(data) 
+    let entity = new this.Model(data)
     try {
       await entity.save() 
       return this._mongoIdToWebId(entity) 

@@ -4,6 +4,9 @@
       <img :src="icon"/>
     </div>
     <div class="information-introduction">
+      <div class="hide-info" @click="infoHandler">
+        <img :src="hideInfo">
+      </div>
       <h1>{{infomation.name}}</h1>
       <p>{{infomation.introduction || 'This user is lazy, nothing left'}}</p>
     </div>
@@ -12,6 +15,7 @@
 
 <script>
 import headPicture from '../assets/images/head-picture.jpg'
+import hideInfo from '../assets/images/ic_first_page_white_36dp_2x.png'
 
 export default {
   props: {
@@ -22,9 +26,15 @@ export default {
       }
     }
   },
+  methods: {
+    infoHandler () {
+      this.$emit('infoHandler')
+    }
+  },
   data () {
     return {
-      icon: headPicture
+      icon: headPicture,
+      hideInfo: hideInfo
     }
   }
 }
@@ -50,6 +60,12 @@ export default {
     width: 320px;
     cursor: default;
     user-select: none;
+    .hide-info {
+      width: 72px;
+      height: 72px;
+      position: absolute;
+      right: 0px;
+    }
     h1 {
       font-size: 2.4rem;
     }

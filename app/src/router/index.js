@@ -4,6 +4,7 @@ import auth from '@/views/auth'
 import home from '@/views/home'
 import publish from '@/views/publish'
 import personal from '@/views/personal'
+import articleList from '@/views/article-list'
 
 Vue.use(Router)
 
@@ -11,8 +12,14 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: home
+      component: home,
+      children: [
+        {
+          path: '/',
+          name: 'home',
+          component: articleList
+        }
+      ]
     },
     {
       path: '/auth',

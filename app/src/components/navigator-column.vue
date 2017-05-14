@@ -1,7 +1,7 @@
 <template>
     <div class="navigation-column">
       <template v-for="menu in menus">
-        <div><img :src="menu.icon"></div>
+        <div @click="menuClick(menu.name, menu.router)"><img :src="menu.icon"></div>
       </template>
     </div>
 </template>
@@ -10,35 +10,57 @@
 import turnBackIcon from '../assets/images/ic_arrow_back_white_36dp_1x.png'
 import publishIcon from '../assets/images/ic_mode_edit_white_36dp_1x.png'
 import personalIcon from '../assets/images/ic_person_white_36dp_1x.png'
-import turnHomeIcon from '../assets/images/ic_last_page_white_36dp_1x.png'
+import showInfoIcon from '../assets/images/ic_last_page_white_36dp_1x.png'
 import turnStarIcon from '../assets/images/ic_star_white_36dp_1x.png'
 import turnFavoriteIcon from '../assets/images/ic_favorite_white_36dp_1x.png'
 import turnSettingIcon from '../assets/images/ic_settings_white_36dp_1x.png'
 
 export default {
+  methods: {
+    menuClick (name, router) {
+      switch (name) {
+        case 'showInfo':
+          this.$emit('navColumnHandler')
+      }
+    }
+  },
   data () {
     return {
       menus: [
         {
-          icon: turnBackIcon
+          icon: turnBackIcon,
+          name: 'turnBack',
+          router: ''
         },
         {
-          icon: publishIcon
+          icon: publishIcon,
+          name: 'publish',
+          router: ''
         },
         {
-          icon: personalIcon
+          icon: personalIcon,
+          name: 'personal',
+          router: ''
         },
         {
-          icon: turnHomeIcon
+          icon: showInfoIcon,
+          name: 'showInfo',
+          router: ''
         },
         {
-          icon: turnStarIcon
+          icon: turnStarIcon,
+          name: 'turnStar',
+          router: ''
         },
         {
-          icon: turnFavoriteIcon
+          icon: turnFavoriteIcon,
+          name: 'turnFavorite',
+          router: ''
         },
         {
-          icon: turnSettingIcon
+          icon: turnSettingIcon,
+          name: 'turnSetting',
+          router: ''
         }
       ]
     }
@@ -48,7 +70,8 @@ export default {
 
 <style lang="scss">
 .navigation-column {
-  width: 60px;
+  width: 3%;
+  min-width: 60px;
   height: 100%;
   display: flex;
   flex-direction: column;

@@ -1,21 +1,19 @@
 <template>
   <div class="container home-view">
-    <div class="information-box">
+    <div class="information-box" v-show="showInfo">
       <navigator :user="user"></navigator>
-      <informationsContainer :infomation="user.user"></informationsContainer>
+      <informationsContainer :infomation="user.user" @infoHandler="infoHandler"></informationsContainer>
     </div>
-    <div class="article-layout">
-      <div class="article-stack-view">
-        <template v-for="(post, index) in post.objects">
-          <articleCard :article="post" :index="index"></articlecard>
-        </template>
-      </div>
+    <navigatorColumn v-show="!showInfo" @navColumnHandler="navColumnHandler"></navigatorcolumn>
+    <div v-bind:class="{'content-layout': showInfo, 'content-bar-layout': !showInfo}">
+      <router-view></router-view>
     </div>
   </div>
 </template>
 
 <script>
 import navigator from '../components/navigator'
+import navigatorColumn from '../components/navigator-column'
 import informationsContainer from '../components/information-container'
 import articleCard from '../components/article-card'
 
@@ -26,7 +24,13 @@ export default {
     ...mapGetters(['user', 'post'])
   },
   methods: {
-    ...mapActions(['queryResource'])
+    ...mapActions(['queryResource']),
+    infoHandler () {
+      this.showInfo = !this.showInfo
+    },
+    navColumnHandler () {
+      this.showInfo = !this.showInfo
+    }
   },
   created () {
     console.log(this.user)
@@ -41,10 +45,13 @@ export default {
   components: {
     navigator,
     informationsContainer,
+    navigatorColumn,
     articleCard
   },
   data () {
-    return {}
+    return {
+      showInfo: true
+    }
   }
 }
 

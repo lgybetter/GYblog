@@ -103,7 +103,7 @@ class BaseResource {
     try {
       let entity = await this.Model.findByIdAndUpdate(id, data).select(this.selectField) 
       if (!entity) {
-        throw new Error('not found') 
+        throw new Error('not found')
       }
       return this._mongoIdToWebId(entity)
     } catch (err) {

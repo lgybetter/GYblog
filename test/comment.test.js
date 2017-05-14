@@ -5,10 +5,10 @@ const assert = require('assert')
 
 let token = null;
 let id = null;
-let posts = [];
+let comment = {};
 
 describe('用户登录', () => {
-  it('用户登陆成功', done => {
+  it.only('用户登陆成功', done => {
     let option = {
       url: `${config.baseUrl}/api/user?email=437675103@qq.com&password=123`,
       json: true
@@ -22,60 +22,50 @@ describe('用户登录', () => {
 });
 
 
-describe('用户文章操作', () => {
-  it('用户发表文章成功', done => {
+describe('用户评论文章操作', () => {
+  it.only('用户评论文章', done => {
     let option = {
-      url: `${config.baseUrl}/api/auth/post`,
+      url: `${config.baseUrl}/api/auth/comment`,
       headers: {
         "Authorization": `Bearer ${token}`
       },
       body: {
-        title: 'test',
-        open: true,
-        content: 'test'
+        postId: '5916fe4afcf8c30c88a6dbc4',
+        content: '该系统存在漏洞'
       },
       json: true
     }
     request.postAsync(option).then(res => {
+      comment = res.body
       assert(res.body.id != null)
     }).then(done, done)
   })
 
-  it('查找所属文章', done => {
+  it.only('查找文章的所有评论', done => {
     let option = {
-      url: `${config.baseUrl}/api/auth/post`,
+      url: `${config.baseUrl}/api/auth/comment`,
       headers: {
         "Authorization": `Bearer ${token}`
+      },
+      qs: {
+        postId: '5916fe4afcf8c30c88a6dbc4'
       },
       json: true
     }
     request.getAsync(option).then(res => {
-      posts = res.body.objects
-      assert(res.body.count > 0)      
+      assert(res.body.count > 0)
     }).then(done, done)
   })
-  it('根据id查看文章', done => {
+
+  it.only('更新对文章的评论', done => {
     let option = {
-      url: `${config.baseUrl}/api/auth/post/${posts[0].id}`,
-      headers: {
-        "Authorization": `Bearer ${token}`
-      },
-      json: true
-    }
-    request.getAsync(option).then(res => {
-      assert(res.body.id != null)
-    }).then(done, done)
-  })
-  it('根据id修改文章', done => {
-    let option = {
-      url: `${config.baseUrl}/api/auth/post/${posts[0].id}`,
+      url: `${config.baseUrl}/api/auth/comment/${comment.id}`,
       headers: {
         "Authorization": `Bearer ${token}`
       },
       body: {
-        title: 'test2',
-        open: false,
-        content: 'test2'
+        postId: '5916fe4afcf8c30c88a6dbc4',
+        content: '该系统没有漏洞了'
       },
       json: true
     }
@@ -83,11 +73,15 @@ describe('用户文章操作', () => {
       assert(res.body.id != null)
     }).then(done, done)
   })
-  it('根据id删除文章', done => {
+
+  it.only('删除对文章的评论', done => {
     let option = {
-      url: `${config.baseUrl}/api/auth/post/${posts[0].id}`,
+      url: `${config.baseUrl}/api/auth/comment/${comment.id}`,
       headers: {
         "Authorization": `Bearer ${token}`
+      },
+      body: {
+        postId: '5916fe4afcf8c30c88a6dbc4'
       },
       json: true
     }

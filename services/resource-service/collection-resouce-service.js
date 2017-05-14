@@ -22,7 +22,9 @@ class CollectionResource extends BaseResource {
     data.createBy = user._id
     let entity = new this.Model(data)
     try {
-      await Post.findByIdAndUpdate(data.postId, { '$inc': { starCount: 1 } })
+      await Post.findByIdAndUpdate(data.postId, { 
+        '$inc': { starCount: 1 } 
+      })
       await entity.save()
       return this._mongoIdToWebId(entity)
     } catch (err) {
@@ -32,12 +34,17 @@ class CollectionResource extends BaseResource {
   
   async findByIdAndRemove({ params, body, query, user }) {
     let postId = body.postId
+    if (!postId) {
+      throw new Error({ code: 400, msg: 'required postId', level: 'error' })       
+    }
     this.queryParams({ query, user })     
     try {
-      await Post.findByIdAndUpdate(postId, { '$inc': { starCount: -1 } })
+      await Post.findByIdAndUpdate(postId, { 
+        '$inc': { starCount: -1 } 
+      })
       let entity = await this.Model.findOneAndRemove({ postId: postId, createBy: user._id }).select(this.selectField) 
       if (!entity) {
-        throw new Error('not found') 
+        throw new Error('not found')
       }
       return this._mongoIdToWebId(entity) 
     } catch (err) {

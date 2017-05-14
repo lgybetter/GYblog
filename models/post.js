@@ -9,6 +9,7 @@ const PostSchema = new Schema({
   open: { type: Boolean, required: true },
   summary: { type: String },
   tags: [{ type: Schema.Types.ObjectId, ref: 'Tags' }],
+  commentCount: { type: Number, default: 0},
   starCount: { type: Number, default: 0 },
   shareCount: { type: Number, default: 0 },
   viewCount: { type: Number, default: 0},

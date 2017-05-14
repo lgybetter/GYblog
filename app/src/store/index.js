@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import * as actions from './actions'
 import * as getters from './getters'
 import user from './modules/user'
-import post from './modules/post'
+import resourceData from './modules/resource-data'
 
 Vue.use(Vuex)
 
@@ -12,6 +12,6 @@ export default new Vuex.Store({
   getters,
   modules: {
     user,
-    post
+    resourceData
   }
 })

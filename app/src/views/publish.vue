@@ -4,10 +4,10 @@
     </navgatorcolumn>
     <div class="publish-view-container">
       <div class="title-submit-box">
-        <input type="text" class="title-text"/>
-        <input type="submit" value="Publish" class="publish-view-container-button publish-view-container-button-background-color"/>
+        <input type="text" class="title-text" v-model="post.title"/>
+        <input type="submit"  @click="publish" value="Publish" class="publish-view-container-button publish-view-container-button-background-color"/>
       </div>
-      <textarea class="text-box"></textarea>
+      <textarea class="text-box" v-model="post.content"></textarea>
       <div class="label-view">
         <template v-for="(label, index) in labels">
           <input @click="selectLabel(index)" :value="label.text" type="button" :class="['publish-view-container-button', 'label-selector', label.style]"/>
@@ -30,6 +30,7 @@
 
 <script>
 import navgatorColumn from '../components/navigator-column'
+import { mapActions } from 'vuex'
 
 export default {
   components: {
@@ -37,6 +38,11 @@ export default {
   },
   data () {
     return {
+      post: {
+        title: '',
+        content: '',
+        open: true
+      },
       labels: [
         {
           text: 'First label',
@@ -61,12 +67,18 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['postResource']),
     selectLabel (index) {
       this.selectFlag = !this.selectFlag
     },
     checkLabel (label) {
       console.log(label)
       this.selectFlag = !this.selectFlag
+    },
+    publish () {
+      this.postResource({ url: 'post', data: this.post }).then(data => {
+        console.log(data)
+      })
     }
   }
 }

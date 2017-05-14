@@ -42,7 +42,7 @@ export default {
       if (event === 'Sign Out') {
         this[types.SIGN_OUT]()
       } else {
-        this.$router.replace({path: this.eventMap.get(event)})
+        this.$router.push(this.eventMap.get(event))
       }
     }
   },

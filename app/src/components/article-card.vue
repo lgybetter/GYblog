@@ -6,13 +6,13 @@
       </div>
       <div class="article-text-box">
         <h1>{{article.title}}</h1>
-        <h2>{{article.createAt}}</h2>
+        <h2>{{article.date}}</h2>
         <p>{{article.content}}</p>
       </div>
     </div>
     <div class="article-box-navigation">
       <div @click="postEvents('thumbUp')"><img :src="icons.thumb"><p>{{article.thumbUpCount}}</p></div>
-      <div @click="postEvents('comments')"><img :src="icons.chat"><p>{{article.comments.length}}</p></div>
+      <div @click="postEvents('comments')"><img :src="icons.chat"><p>{{article.commentCount}}</p></div>
       <div @click="postEvents('star')"><img :src="icons.star"><p>{{article.starCount}}</p></div>
       <div @click="postEvents('share')"><img :src="icons.share"><p>{{article.shareCount}}</p></div>
     </div>
@@ -25,13 +25,8 @@ import thumbUpIcon from '../assets/images/ic_thumb_up_black_24dp_1x.png'
 import chatIcon from '../assets/images/ic_chat_black_24dp_1x.png'
 import starIcon from '../assets/images/ic_star_black_24dp_1x.png'
 import shareIcon from '../assets/images/ic_share_black_24dp_1x.png'
-import { mapActions, mapGetters } from 'vuex'
-import * as types from '../store/mutation-types'
 
 export default {
-  computed: {
-    ...mapGetters(['user'])
-  },
   props: {
     article: {
       type: Object,
@@ -47,15 +42,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions([types.POST_EVENTS]),
     postEvents (event) {
-      if (event === 'comments') {
-        this.$router.replace({ path: '/auth' })
-      } else {
-        this[types.POST_EVENTS]({ user: this.user, post: this.article, event: event, index: this.index }).then(body => {
-          console.log(body)
-        })
-      }
     }
   },
   data () {
@@ -80,7 +67,8 @@ export default {
   margin: 0;
   display: flex;
   flex-direction: row;
-  margin-top: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   .article-box-container {
     width: 620px;
     height: 300px;

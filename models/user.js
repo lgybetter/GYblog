@@ -7,7 +7,8 @@ const UsersSchema = new Schema({
   introduction: { type: String },
   email: { type: String, unique: true, required: true },
   password: { type: String, required: true },
-  createAt: { type: Date, default: Date.now() }
+  icon: { type: String },
+  date: { type: Date, default: Date.now() }
 })
 
 const Users = mongoose.model('Users', UsersSchema)

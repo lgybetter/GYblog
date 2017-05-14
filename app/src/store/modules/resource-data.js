@@ -47,6 +47,7 @@ const mutations = {
     if (data.objects) {
       data.objects.forEach(doc => {
         if (doc.date) {
+          console.log(doc.date)
           doc.date = moment(doc.date).format('YYYY-MM-DD HH:mm:ss')
         }
       })

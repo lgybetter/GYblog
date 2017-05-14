@@ -24,4 +24,10 @@ $(document).ready(function() {
         // $("#navigation-column-push-button").show();
         $("#navigation-column").animate({ width: '60px' }, 1000);
     });
+    $("#container-shelter").click(function() {
+        $("#container-shelter").fadeOut(500);
+        $("#information-box").animate({ width: '0' })
+        $("#navigation").animate({ width: '0' })
+        $("#navigation-column").animate({ width: '60px' }, 1000);
+    })
 });

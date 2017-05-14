@@ -6,7 +6,7 @@
     </div>
     <div class="article-layout">
       <div class="article-stack-view">
-        <template v-for="(post, index) in posts">
+        <template v-for="(post, index) in post.objects">
           <articleCard :article="post" :index="index"></articlecard>
         </template>
       </div>
@@ -20,20 +20,22 @@ import informationsContainer from '../components/information-container'
 import articleCard from '../components/article-card'
 
 import { mapGetters, mapActions } from 'vuex'
-import * as types from '../store/mutation-types'
 
 export default {
   computed: {
-    ...mapGetters(['user', 'posts'])
+    ...mapGetters(['user', 'post'])
   },
   methods: {
-    ...mapActions([types.QUERY_POSTS])
+    ...mapActions(['queryResource'])
   },
   created () {
+    console.log(this.user)
     if (this.user.token) {
-      this[types.QUERY_POSTS]({user: this.user}).then(body => {
+      this.queryResource({ url: 'post', args: {} }).then(body => {
         console.log(body)
       })
+    } else {
+      this.$router.push('/auth')
     }
   },
   components: {

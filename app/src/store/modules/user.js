@@ -1,5 +1,6 @@
-import authApi from '../api/authApi'
+import authApi from '../api/auth-api'
 import * as types from '../mutation-types'
+import config from '../config'
 
 const state = {
   user: JSON.parse(localStorage.getItem('user')) || {}
@@ -13,6 +14,12 @@ const actions = {
   [types.SIGN_IN] ({ commit }, { user }) {
     return authApi.signIn(user).then(res => {
       localStorage.setItem('user', JSON.stringify(res.body.status))
+      config.options = {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user')).token}`
+        }
+      }
       commit(types.SIGN_IN, { user: res.body.status })
       return Promise.resolve(res)
     })

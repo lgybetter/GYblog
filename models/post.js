@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose'
 const Schema = mongoose.Schema;
 
-const PostsSchema = new Schema({
+const PostSchema = new Schema({
   title: { type: String, required: true },
   createBy: { type: Schema.Types.ObjectId, ref: 'Users' },
   createAt: { type: Date, default: Date.now },
@@ -9,12 +9,13 @@ const PostsSchema = new Schema({
   open: { type: Boolean, required: true },
   summary: { type: String },
   tags: [{ type: Schema.Types.ObjectId, ref: 'Tags' }],
-  comments: [{ type: Schema.Types.ObjectId, ref: 'Comments' }],
+  commentCount: { type: Number, default: 0},
   starCount: { type: Number, default: 0 },
   shareCount: { type: Number, default: 0 },
+  viewCount: { type: Number, default: 0},
   thumbUpCount: { type: Number, default: 0 }
-});
+})
 
-const Posts = mongoose.model('Posts', PostsSchema);
+const Post = mongoose.model('Post', PostSchema)
 
-module.exports = Posts;
+export default Post

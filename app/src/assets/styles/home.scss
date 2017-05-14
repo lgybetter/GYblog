@@ -34,6 +34,7 @@
   flex-direction: column;
   align-items: center;
   margin-left: 30%;
+  padding: 50px;
   .article-stack-view {
     width: 826px;
     display: flex;
@@ -41,7 +42,6 @@
     flex-direction: column;
     align-items: center;
     padding-bottom: 60px;
-    padding-top: 20px;
   }
 }
 

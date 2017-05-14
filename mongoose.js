@@ -1,8 +1,9 @@
-const mongoose = require('mongoose');
-const nconf = require('nconf');
-mongoose.connect(nconf.get('mongodb'));
+import mongoose from 'mongoose'
+import nconf from 'nconf'
+mongoose.connect(nconf.get('mongodb'))
 
-require('./models/comments');
-require('./models/posts');
-require('./models/tags');
-require('./models/users');
+import './models/comment'
+import './models/post'
+import './models/tag'
+import './models/collection'
+import './models/user'

@@ -1,3 +1,3 @@
-require('./nconf')
-require('./mongoose')
-require('./express')
+import './nconf'
+import './mongoose'
+import './express'

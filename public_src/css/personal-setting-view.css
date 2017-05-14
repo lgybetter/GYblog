@@ -17,19 +17,40 @@ body {
 
 .text-view-container {
     width: 1000px;
-    margin: 100px auto;
-    text-align: center;
+    height: 600px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
 }
 
-.text-view-container div {
-    margin: 30px 0;
+.information-setting-view {
+    margin: 40px;
 }
 
-.text-view-container div>p {
+.a-line-display {
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+}
+
+.a-line-display div {
+    width: 200px;
+    height: 40px;
+    margin: 0;
+    line-height: 40px;
+}
+
+.information-setting-view div>p {
     font-size: 2rem;
     color: #fff;
-    display: inline;
-    margin-right: 10px;
+    /*display: inline;*/
+    user-select: none;
+    cursor: default;
+    margin: 0;
 }
 
 .text-box {
@@ -39,4 +60,40 @@ body {
     text-indent: 5px;
     border-radius: 5px;
     outline: none;
+}
+
+.head-picure-introduction-view {
+    width: 1000px;
+    display: flex;
+    flex-direction: row;
+    margin: 40px 0;
+}
+
+.head-picure-introduction-view div {
+    margin: 0 40px;
+}
+
+.head-picture-box {
+    width: 300px;
+    height: 300px;
+    background-color: #000;
+    border: 10px solid #fff;
+    cursor: pointer;
+    user-select: none;
+}
+
+.head-picture-box img {
+    width: 100%;
+}
+
+.head-picure-introduction-view .textarea {
+    width: 520px;
+    height: 320px;
+    border-radius: 5px;
+    outline: none;
+    font-size: 2rem;
+    font-family: "微软雅黑";
+    padding: 10px;
+    resize: none;
+    border: 2px inset;
 }

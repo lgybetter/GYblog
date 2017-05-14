@@ -1,8 +1,8 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
+import nconf from 'nconf'
+import Promise from 'bluebird'
+import jwt from 'jsonwebtoken'
 const Users = mongoose.model('Users')
-const nconf = require('nconf')
-const Promise = require('bluebird')
-const jwt = require('jsonwebtoken')
 
 const createUser = (data) => {
   return new Users(data).save()
@@ -50,7 +50,7 @@ const verifyUser = (data) => {
   });
 }
 
-module.exports = {
+export default {
   createUser,
   removeUser,
   updateUser,

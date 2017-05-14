@@ -1,7 +1,7 @@
 <template>
   <div class="information-box-container">
     <div class="information-picture-box">
-      <img :src="information || icon"/>
+      <img :src="icon"/>
     </div>
     <div class="information-introduction">
       <h1>{{infomation.name}}</h1>

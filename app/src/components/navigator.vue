@@ -32,7 +32,7 @@ export default {
     return {
       navUnSignIn: ['Sign In'],
       navSignIn: ['Publish', 'Personal', 'Likes', 'Followers', 'Setting', 'Sign Out'],
-      routers: ['/auth', '/public', '/personal', '/likes', '/followers', '/setting', '/sign-out'],
+      routers: ['/auth', '/publish', '/personal', '/likes', '/followers', '/setting', '/sign-out'],
       eventMap: new Map()
     }
   },
@@ -42,7 +42,7 @@ export default {
       if (event === 'Sign Out') {
         this[types.SIGN_OUT]()
       } else {
-        this.$router.replace({path: this.eventMap.get(event)})
+        this.$router.push(this.eventMap.get(event))
       }
     }
   },

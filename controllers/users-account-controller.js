@@ -1,7 +1,6 @@
-const userAccountService = require('../services/users-account-service');
-const Promise = require('bluebird');
-const co = require('co');
-const jwt = require('jsonwebtoken');
+import userAccountService from '../services/users-account-service'
+import Promise from 'bluebird'
+import jwt from 'jsonwebtoken'
 
 /**
  * 用户登录
@@ -9,15 +8,14 @@ const jwt = require('jsonwebtoken');
  *  email: 邮箱
  *  password: 口令
  */
-exports.userLogIn = (req, res, next) => {
+exports.userLogIn = async (req, res, next) => {
   let data = req.query || {};
-  console.log(data)
-  co(function* () {
-    let status = yield userAccountService.verifyUser(data).catch(err => {
-      next(err);
-    });
-    res.json({status: status, success: true });
-  });
+  try {
+    let status = await userAccountService.verifyUser(data)
+    res.json({status: status, success: true })
+  } catch (err) {
+    next(err)
+  }
 }
 
 /**
@@ -27,14 +25,14 @@ exports.userLogIn = (req, res, next) => {
  *  name: 昵称
  *  password: 口令
  */
-exports.userSignIn = (req, res, next) => {
+exports.userSignIn = async (req, res, next) => {
   let data = req.body || {};
-  co(function* () {
-    let user = yield userAccountService.createUser(data).catch(err => {
-      next(err);
-    });
-    res.json({ user: user, success: true });
-  });
+  try {
+    let user = await userAccountService.createUser(data)
+    res.json({ user: user, success: true })
+  } catch (err) {
+    next(err)    
+  }
 }
 
 /**
@@ -42,15 +40,15 @@ exports.userSignIn = (req, res, next) => {
  * @param:
  *  phone: 手机号码
  */
-exports.userUpdate = (req, res, next) => {
-  let data = req.body || {};
-  let id = req.params.id || {};
-  co(function* () {
-    let status = yield userAccountService.updateUser(id, data).catch(err => {
-      next(err);
-    });
-    res.json({ status: status, success: true });
-  });
+exports.userUpdate = async (req, res, next) => {
+  let data = req.body || {}
+  let id = req.params.id || {}
+  try {
+    let status = await userAccountService.updateUser(id, data)
+    res.json({ status: status, success: true })
+  } catch (err) {
+    next(err)    
+  }
 }
 
 /**
@@ -58,13 +56,13 @@ exports.userUpdate = (req, res, next) => {
  * @param
  *  postId: 文章ID
  */
-exports.starPost = (req, res, next) => {
-  let postId = req.params.id || {};
-  let user = req.user;
-  co(function* () {
-    let status = yield userAccountService.starPost(postId, user._id).catch(err => {
-      next(err);
-    });
-    res.json( { status: status, success: true });
-  });
+exports.starPost = async (req, res, next) => {
+  let postId = req.params.id || {}
+  let user = req.user
+  try {
+    let status = await userAccountService.starPost(postId, user._id)
+    res.json( { status: status, success: true })
+  } catch (err) {
+    next(err)    
+  }
 }

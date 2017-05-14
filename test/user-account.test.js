@@ -1,7 +1,7 @@
-const config = require('./config');
-const Promise = require('bluebird');
-const request = require('request');
-const expect = require('chai').expect;
+const config = require('./config')
+const Promise = require('bluebird')
+const expect = require('chai').expect
+const request = Promise.promisifyAll(require('request'))
 
 let token = null;
 let id = null;
@@ -17,12 +17,10 @@ describe('用户注册', () => {
       },
       json: true
     }
-    request.post(option, (err, res, body) => {
-      expect(err).to.be.equal(null);
+    request.postAsync(option).then(res => {
       expect(res.statusCode).to.be.equal(200);
-      expect(body.success).to.be.equal(true);
-      done();
-    });
+      expect(res.body.success).to.be.equal(true);
+    }).then(done, done)
   });
 });
 
@@ -32,14 +30,12 @@ describe('用户登录', () => {
       url: `${config.baseUrl}/api/user?email=437675103@qq.com&password=123`,
       json: true
     }
-    request.get(option, (err, res, body) => {
-      expect(err).to.be.equal(null);
+    request.getAsync(option).then(res => {
       expect(res.statusCode).to.be.equal(200);
-      expect(body.success).to.be.equal(true);
-      token = body.status.token;
-      id = body.status.user._id;
-      done();
-    })
+      expect(res.body.success).to.be.equal(true);
+      token = res.body.status.token;
+      id = res.body.status.user._id;
+    }).then(done, done)
   })
 });
 
@@ -55,11 +51,9 @@ describe('用户信息更新', () => {
       },
       json: true
     }
-    request.put(option, (err, res, body) => {
-      expect(err).to.be.equal(null);
+    request.putAsync(option).then(res => {
       expect(res.statusCode).to.be.equal(200);
-      expect(body.success).to.be.equal(true);
-      done();
-    })
+      expect(res.body.success).to.be.equal(true);
+    }).then(done, done)
   })
 })

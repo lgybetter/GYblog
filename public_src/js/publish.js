@@ -15,12 +15,6 @@ $(document).ready(function() {
         //$("#alert-box").animate({ left: '-800px' }, 500).hide();
         //$("#body-container").css({ 'transform': 'none', 'transition-duration': 'none' });
     })
-    $("#container-shelter").click(function() {
-        $("#container-shelter").fadeOut(500);
-        $("#information-box").animate({ width: '0' })
-        $("#navigation").animate({ width: '0' })
-        $("#navigation-column").animate({ width: '60px' }, 1000);
-    })
     $(".label-option").click(function() {
         let label = $(this).text();
         //$("#first-label").val(label);

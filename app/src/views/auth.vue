@@ -68,7 +68,7 @@ export default {
     userSignIn () {
       this[types.SIGN_IN]({ user: this.userForm }).then(res => {
         if (res.status === 200) {
-          this.$router.replace({ path: '/' })
+          this.$router.push('/')
         } else {
           this.state = !this.state
         }

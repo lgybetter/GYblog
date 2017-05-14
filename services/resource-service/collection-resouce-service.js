@@ -34,11 +34,8 @@ class CollectionResource extends BaseResource {
     let postId = body.postId
     this.queryParams({ query, user })     
     try {
-      console.log('kkk')
-      await Post.findByIdAndUpdate(data.postId, { '$inc': { "starCount": -1 } })
-      console.log('123')
-      let entity = await this.Model.findOneAndRemove({ postId: id, createBy: user._id }).select(this.selectField) 
-      console.log('fff')
+      await Post.findByIdAndUpdate(postId, { '$inc': { starCount: -1 } })
+      let entity = await this.Model.findOneAndRemove({ postId: postId, createBy: user._id }).select(this.selectField) 
       if (!entity) {
         throw new Error('not found') 
       }

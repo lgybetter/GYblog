@@ -10,7 +10,6 @@ import jwt from 'jsonwebtoken'
  */
 exports.userLogIn = async (req, res, next) => {
   let data = req.query || {};
-  console.log(data)
   try {
     let status = await userAccountService.verifyUser(data)
     res.json({status: status, success: true })

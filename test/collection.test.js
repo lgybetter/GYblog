@@ -64,7 +64,6 @@ describe('用户收藏文章操作', () => {
       json: true
     }
     request.deleteAsync(option).then(res => {
-      console.log(res.body)
       assert(res.body.id != null)
     }).then(done, done)
   })

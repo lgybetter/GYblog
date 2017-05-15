@@ -6,7 +6,6 @@ export default {
     return Vue.http.get(`${config.authUrl}/${url}/${id}`, config.options).then(res => res.body)
   },
   queryResource ({ url, args }) {
-    console.log(args)
     let requestUrl = `${config.authUrl}/${url}?`
     if (args._page) {
       requestUrl += `_page=${args._page}&`

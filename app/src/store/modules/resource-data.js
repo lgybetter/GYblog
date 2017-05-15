@@ -12,6 +12,9 @@ const state = {
 const actions = {
   getResource ({ commit }, { url, id }) {
     return resourceApi.getResource({ url, id }).then(data => {
+      if (data.date) {
+        data.date = moment(data.date).format('YYYY-MM-DD HH:mm:ss')
+      }
       return Promise.resolve(data)
     })
   },

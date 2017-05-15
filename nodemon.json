@@ -5,6 +5,7 @@
     "test/*",
     "scripts/*",
     "mochawesome-reports/*",
-    "logs/*"
+    "logs/*",
+    "app/*"
   ]
 }

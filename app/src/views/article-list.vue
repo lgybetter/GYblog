@@ -19,10 +19,8 @@ export default {
     ...mapActions(['queryResource'])
   },
   created () {
-    console.log(this.user)
     if (this.token) {
       this.queryResource({ url: 'post', args: {} }).then(body => {
-        console.log(body)
       })
     } else {
       this.$router.push('/auth')

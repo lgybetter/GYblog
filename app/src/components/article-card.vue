@@ -1,6 +1,6 @@
 <template>
   <div class="article-box">
-    <div class="article-box-container">
+    <div class="article-box-container" @click="showArticle(article.id)">
       <div class="image-box">
         <img :src="articlePricture"/>
       </div>
@@ -43,6 +43,9 @@ export default {
   },
   methods: {
     postEvents (event) {
+    },
+    showArticle (id) {
+      this.$router.push(`/article/${id}`)
     }
   },
   data () {

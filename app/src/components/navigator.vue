@@ -67,6 +67,7 @@ export default {
       switch (value.label) {
         case 'Sign Out':
           this.signOut()
+          this.$router.push('/auth')
           break
         case 'Personal':
           this.$router.push(`${value.router}/${this.user._id}`)

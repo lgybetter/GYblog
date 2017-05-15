@@ -10,5 +10,8 @@ export default {
   },
   updateUser (user) {
     return Vue.http.put(`${config.authUrl}/user`, user, config.options)
+  },
+  userInfo (id) {
+    return Vue.http.get(`${config.authUrl}/user/${id}`, config.options)
   }
 }

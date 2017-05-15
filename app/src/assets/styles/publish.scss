@@ -12,13 +12,17 @@
     .title-text {
       width: 1000px;
       height: 40px;
+      padding: 10px;
       box-sizing: border-box;
       outline: none;
       font-size: 2rem;
       text-indent: 5px;
       border-radius: 5px;
       margin-right: 20px;
-      border: 2px inset rgb(126, 126, 126)
+      border: 2px solid rgb(126, 126, 126);
+      &:focus {
+        border: 2px solid rgb(0, 219, 139);
+      }
     }
   }
   .text-box {
@@ -31,8 +35,11 @@
     border-radius: 5px;
     outline: none;
     box-sizing: border-box;
-    border: 2px inset rgb(126, 126, 126);
+    border: 2px solid rgb(126, 126, 126);
     resize: none;
+    &:focus {
+      border: 2px solid rgb(0, 219, 139);
+    }
   }
   .label-view {
     display: flex;

@@ -37,6 +37,11 @@ const actions = {
     localStorage.clear('token')
     commit(types.SIGN_OUT)
   },
+  userInfo ({ commit }, { id }) {
+    return authApi.userInfo(id).then(res => {
+      return Promise.resolve(res.body)
+    })
+  },
   updateUser ({ commit }, { user }) {
     return authApi.updateUser(user).then(res => {
       localStorage.setItem('user', JSON.stringify(res.body))

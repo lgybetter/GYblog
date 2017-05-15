@@ -5,7 +5,7 @@
         <div class="head-picture-box">
         </div>
         <div>
-          <textarea v-model="user.introduction" class="textarea" placeholder="Introduce yourself here..."></textarea>
+          <textarea v-model="userMsg.introduction" class="textarea" placeholder="Introduce yourself here..."></textarea>
         </div>
       </div>
       <div class="information-setting-view">
@@ -13,19 +13,19 @@
           <div>
             <p>Nick Name:</p>
           </div>
-          <input type="text" v-model="user.name" class="text-box" />
+          <input type="text" v-model="userMsg.name" class="text-box" />
         </div>
         <div class="a-line-display">
           <div>
             <p>Phone Number:</p>
           </div>
-          <input type="text" v-model="user.phone" class="text-box" />
+          <input type="text" v-model="userMsg.phone" class="text-box" />
         </div>
         <div class="a-line-display">
           <div>
             <p>Job Occupation:</p>
           </div>
-          <input type="text" v-model="user.job" class="text-box" />
+          <input type="text" v-model="userMsg.job" class="text-box" />
         </div>
         <input class="action-button" type="submit" value="Save" @click="save"/>
         <input class="action-button" type="submit" value="Cancle" @click="cancle"/>        
@@ -36,25 +36,33 @@
 
 <script>
 import navigatorColumn from '../components/navigator-column'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
+  computed: {
+    ...mapGetters(['user'])
+  },
   components: {
     navigatorColumn
   },
+  created () {
+    this.userInfo({ id: this.user._id }).then(data => {
+      this.userMsg = data
+    })
+  },
   methods: {
-    ...mapActions(['updateUser']),
+    ...mapActions(['updateUser', 'userInfo']),
     cancle () {
       this.$router.push('/')
     },
     save () {
-      this.updateUser({ user: this.user }).then(res => {
+      this.updateUser({ user: this.userMsg }).then(res => {
       })
     }
   },
   data () {
     return {
-      user: {
+      userMsg: {
         name: '',
         phone: '',
         introduction: '',

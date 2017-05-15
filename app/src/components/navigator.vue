@@ -3,14 +3,14 @@
     <template v-if="!token">
       <template v-for="item in navUnSignIn">
         <div @click="clickHandler(item)">
-          <p>{{item}}</p>
+          <p>{{item.label}}</p>
         </div>
       </template>
     </template>
     <template v-else>
       <template v-for="item in navSignIn">
         <div @click="clickHandler(item)">
-          <p>{{item}}</p>
+          <p>{{item.label}}</p>
         </div>
       </template>
     </template>
@@ -19,29 +19,60 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  created () {
-    this.navUnSignIn.concat(this.navSignIn).forEach((value, index) => {
-      this.eventMap.set(value, this.routers[index])
-    })
+  computed: {
+    ...mapGetters(['user'])
   },
   data () {
     return {
-      navUnSignIn: ['Sign In'],
-      navSignIn: ['Publish', 'Personal', 'Likes', 'Followers', 'Setting', 'Sign Out'],
-      routers: ['/auth', '/publish', '/personal', '/likes', '/followers', '/setting', '/sign-out'],
-      eventMap: new Map()
+      navUnSignIn: [
+        {
+          label: 'Sign In',
+          router: '/auth'
+        }
+      ],
+      navSignIn: [
+        {
+          label: 'Publish',
+          router: '/publish'
+        },
+        {
+          label: 'Personal',
+          router: '/personal'
+        },
+        {
+          label: 'Stars',
+          router: '/stars'
+        },
+        {
+          label: 'Followers',
+          router: '/followers'
+        },
+        {
+          label: 'Setting',
+          router: '/setting'
+        },
+        {
+          label: 'Sign Out',
+          router: '/sign-out'
+        }
+      ]
     }
   },
   methods: {
     ...mapActions(['signOut']),
-    clickHandler (event) {
-      if (event === 'Sign Out') {
-        this.signOut()
-      } else {
-        this.$router.push(this.eventMap.get(event))
+    clickHandler (value) {
+      switch (value.label) {
+        case 'Sign Out':
+          this.signOut()
+          break
+        case 'Personal':
+          this.$router.push(`${value.router}/${this.user._id}`)
+          break
+        default:
+          this.$router.push(value.router)
       }
     }
   },

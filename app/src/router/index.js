@@ -6,6 +6,7 @@ import publish from '@/views/publish'
 import setting from '@/views/setting'
 import notFound from '@/views/not-found'
 import articleList from '@/views/article-list'
+import personal from '@/views/personal'
 
 Vue.use(Router)
 
@@ -44,6 +45,11 @@ export default new Router({
           component: publish
         }
       ]
+    },
+    {
+      path: '/personal/:id',
+      name: 'personal',
+      component: personal
     },
     {
       path: '*',

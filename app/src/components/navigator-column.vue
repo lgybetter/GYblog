@@ -14,8 +14,12 @@ import showInfoIcon from '../assets/images/ic_last_page_white_36dp_1x.png'
 import turnStarIcon from '../assets/images/ic_star_white_36dp_1x.png'
 import turnFavoriteIcon from '../assets/images/ic_favorite_white_36dp_1x.png'
 import turnSettingIcon from '../assets/images/ic_settings_white_36dp_1x.png'
+import { mapGetters } from 'vuex'
 
 export default {
+  computed: {
+    ...mapGetters(['user'])
+  },
   methods: {
     menuClick (name, router) {
       switch (name) {
@@ -24,6 +28,12 @@ export default {
           break
         case 'turnBack':
           this.$router.back()
+          break
+        case 'personal':
+          this.$router.push(`${router}/${this.user._id}`)
+          break
+        default:
+          this.$router.push(router)
       }
     }
   },
@@ -32,18 +42,17 @@ export default {
       menus: [
         {
           icon: turnBackIcon,
-          name: 'turnBack',
-          router: ''
+          name: 'turnBack'
         },
         {
           icon: publishIcon,
           name: 'publish',
-          router: ''
+          router: '/publish'
         },
         {
           icon: personalIcon,
           name: 'personal',
-          router: ''
+          router: '/personal'
         },
         {
           icon: showInfoIcon,
@@ -63,7 +72,7 @@ export default {
         {
           icon: turnSettingIcon,
           name: 'turnSetting',
-          router: ''
+          router: '/setting'
         }
       ]
     }

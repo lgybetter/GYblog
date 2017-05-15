@@ -21,6 +21,9 @@ export default {
       switch (name) {
         case 'showInfo':
           this.$emit('navColumnHandler')
+          break
+        case 'turnBack':
+          this.$router.back()
       }
     }
   },

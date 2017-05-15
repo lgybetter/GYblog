@@ -30,27 +30,22 @@
 .content-layout {
   width: 70%;
   overflow: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-left: 30%;
   padding: 50px;
-  .article-stack-view {
-    width: 826px;
-    display: flex;
-    overflow: auto;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 60px;
-  }
+  box-sizing: border-box;
+}
+
+.article-stack-view {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content:center;
+  padding-bottom: 60px;
 }
 
 .content-bar-layout {
   width: 97%;
   overflow: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-left: 10%;
   padding: 50px;
+  box-sizing: border-box;
 }

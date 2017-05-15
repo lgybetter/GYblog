@@ -13,14 +13,14 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters(['user', 'post'])
+    ...mapGetters(['user', 'post', 'token'])
   },
   methods: {
     ...mapActions(['queryResource'])
   },
   created () {
     console.log(this.user)
-    if (this.user.token) {
+    if (this.token) {
       this.queryResource({ url: 'post', args: {} }).then(body => {
         console.log(body)
       })

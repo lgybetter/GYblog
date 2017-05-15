@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import auth from '@/views/auth'
 import home from '@/views/home'
 import publish from '@/views/publish'
-import personal from '@/views/personal'
+import setting from '@/views/setting'
 import articleList from '@/views/article-list'
 
 Vue.use(Router)
@@ -18,6 +18,16 @@ export default new Router({
           path: '/',
           name: 'home',
           component: articleList
+        },
+        {
+          path: '/setting',
+          name: 'setting',
+          component: setting
+        },
+        {
+          path: '/publish',
+          name: 'publish',
+          component: publish
         }
       ]
     },
@@ -25,16 +35,6 @@ export default new Router({
       path: '/auth',
       name: 'auth',
       component: auth
-    },
-    {
-      path: '/publish',
-      name: 'publish',
-      component: publish
-    },
-    {
-      path: '/personal',
-      name: 'personal',
-      component: personal
     }
   ]
 })

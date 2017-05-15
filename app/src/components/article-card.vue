@@ -64,11 +64,9 @@ export default {
 .article-box {
   width: 680px;
   height: 300px;
-  margin: 0;
+  margin: 20px 20px 20px 20px;
   display: flex;
   flex-direction: row;
-  margin-top: 20px;
-  margin-bottom: 20px;
   .article-box-container {
     width: 620px;
     height: 300px;

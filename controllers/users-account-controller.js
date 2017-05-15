@@ -11,8 +11,8 @@ import jwt from 'jsonwebtoken'
 exports.userLogIn = async (req, res, next) => {
   let data = req.query || {};
   try {
-    let status = await userAccountService.verifyUser(data)
-    res.json({status: status, success: true })
+    let user = await userAccountService.verifyUser(data)
+    res.json(user)
   } catch (err) {
     next(err)
   }
@@ -29,7 +29,7 @@ exports.userSignIn = async (req, res, next) => {
   let data = req.body || {};
   try {
     let user = await userAccountService.createUser(data)
-    res.json({ user: user, success: true })
+    res.json(user)
   } catch (err) {
     next(err)    
   }
@@ -42,27 +42,22 @@ exports.userSignIn = async (req, res, next) => {
  */
 exports.userUpdate = async (req, res, next) => {
   let data = req.body || {}
-  let id = req.params.id || {}
+  let id = req.user._id
   try {
-    let status = await userAccountService.updateUser(id, data)
-    res.json({ status: status, success: true })
+    let user = await userAccountService.updateUser(id, data)
+    res.json(user)
   } catch (err) {
-    next(err)    
+    next(err)   
   }
 }
 
-/**
- * 用户收藏文章
- * @param
- *  postId: 文章ID
- */
-exports.starPost = async (req, res, next) => {
-  let postId = req.params.id || {}
-  let user = req.user
+exports.userInfo = async (req, res, next) => {
+  let id = req.params.id
+  let _id = req.user._id
   try {
-    let status = await userAccountService.starPost(postId, user._id)
-    res.json( { status: status, success: true })
+    let user = await userAccountService.findUser(id, _id)
+    res.json(user)
   } catch (err) {
-    next(err)    
+    next(err)
   }
 }

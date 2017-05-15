@@ -41,14 +41,10 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-import * as types from '../store/mutation-types'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'auth',
-  computed: {
-    ...mapGetters(['user'])
-  },
   data () {
     return {
       state: true,
@@ -61,12 +57,12 @@ export default {
     }
   },
   methods: {
-    ...mapActions([types.SIGN_IN, types.SIGN_UP]),
+    ...mapActions(['signIn', 'signUp']),
     changeState () {
       this.state = !this.state
     },
     userSignIn () {
-      this[types.SIGN_IN]({ user: this.userForm }).then(res => {
+      this.signIn({ user: this.userForm }).then(res => {
         if (res.status === 200) {
           this.$router.push('/')
         } else {
@@ -76,13 +72,12 @@ export default {
     },
     userSignUp () {
       if (this.userForm.confirmPassword === this.userForm.password) {
-        this[types.SIGN_UP]({ user: this.userForm }).then(res => {
+        this.signUp({ user: this.userForm }).then(res => {
           if (res.status === 200) {
             this.state = !this.state
           }
         })
       } else {
-        console.log('请确认密码')
       }
     }
   }

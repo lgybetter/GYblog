@@ -1,6 +1,6 @@
 <template>
   <div class="navigation">
-    <template v-if="!user.token">
+    <template v-if="!token">
       <template v-for="item in navUnSignIn">
         <div @click="clickHandler(item)">
           <p>{{item}}</p>
@@ -20,7 +20,6 @@
 
 <script>
 import { mapActions } from 'vuex'
-import * as types from '../store/mutation-types'
 
 export default {
   created () {
@@ -37,22 +36,20 @@ export default {
     }
   },
   methods: {
-    ...mapActions([types.SIGN_OUT]),
+    ...mapActions(['signOut']),
     clickHandler (event) {
       if (event === 'Sign Out') {
-        this[types.SIGN_OUT]()
+        this.signOut()
       } else {
         this.$router.push(this.eventMap.get(event))
       }
     }
   },
   props: {
-    user: {
-      type: Object,
+    token: {
+      type: String,
       default () {
-        return {
-          token: ''
-        }
+        return ''
       }
     }
   }

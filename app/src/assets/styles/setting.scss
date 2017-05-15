@@ -1,21 +1,8 @@
 @import './base.scss';
 
-.personal-view {
-  @extend .container;
-  background-image: url('../assets/images/background.jpg');
-  background-repeat: repeat;
-  background-attachment: fixed;
-}
-
 .text-view-container {
   width: 1000px;
   height: 600px;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
   .head-picure-introduction-view {
     width: 1000px;
     display: flex;

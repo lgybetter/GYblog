@@ -9,19 +9,23 @@ const createUser = (data) => {
 }
 
 const removeUser = (id) => {
-  return Users.remove({ _id: id })
+  return Users.findByIdAndRemove(id)
 }
 
-const updateUser = (id, data) => {
-  return Users.update({_id: id }, data)
+const updateUser = async (id, data) => {
+  await Users.findByIdAndUpdate(id, data)
+  return Users.findById(id)
 }
 
 const queryUsers = () => {
   return Users.find({})
 }
 
-const findUser = (id) => {
-  return Users.findOne({ _id: id })
+const findUser = (id, _id) => {
+  if (id !== _id) {
+    throw new Error('can not found other user info')
+  }
+  return Users.findById(id)
 }
 
 const verifyUser = (data) => {
@@ -38,7 +42,7 @@ const verifyUser = (data) => {
       return Promise.resolve({ 
         code: 200, 
         msg: 'login success', 
-        user: user,
+        data: user,
         token: token 
       });
     } else {

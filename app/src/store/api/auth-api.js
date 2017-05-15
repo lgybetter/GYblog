@@ -7,5 +7,8 @@ export default {
   },
   signIn (user) {
     return Vue.http.get(`${config.commonUrl}/user/?email=${user.email}&password=${user.password}`)
+  },
+  updateUser (user) {
+    return Vue.http.put(`${config.authUrl}/user`, user, config.options)
   }
 }

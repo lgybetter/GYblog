@@ -1,8 +1,8 @@
 <template>
   <div class="container home-view">
     <div class="information-box" v-show="showInfo">
-      <navigator :user="user"></navigator>
-      <informationsContainer :infomation="user.user" @infoHandler="infoHandler"></informationsContainer>
+      <navigator :token="token"></navigator>
+      <informationsContainer :infomation="user" @infoHandler="infoHandler"></informationsContainer>
     </div>
     <navigatorColumn v-show="!showInfo" @navColumnHandler="navColumnHandler"></navigatorcolumn>
     <div v-bind:class="{'content-layout': showInfo, 'content-bar-layout': !showInfo}">
@@ -21,7 +21,7 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters(['user', 'post'])
+    ...mapGetters(['user', 'post', 'token'])
   },
   methods: {
     ...mapActions(['queryResource']),
@@ -33,10 +33,8 @@ export default {
     }
   },
   created () {
-    console.log(this.user)
-    if (this.user.token) {
+    if (this.token) {
       this.queryResource({ url: 'post', args: {} }).then(body => {
-        console.log(body)
       })
     } else {
       this.$router.push('/auth')

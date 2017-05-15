@@ -65,6 +65,11 @@ export default {
       height: 72px;
       position: absolute;
       right: 0px;
+      border-radius: 50%;
+      &:hover {
+        color: #008f5b;
+        background-color: #3fff7a;
+      }
     }
     h1 {
       font-size: 2.4rem;

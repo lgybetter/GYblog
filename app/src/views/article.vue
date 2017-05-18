@@ -1,7 +1,7 @@
 <template>
   <div class="child-view">
-    <h1>asdfas</h1>
-    <vue-markdown class="markdown">this is the default slot</vue-markdown>
+    <h1>{{post.title}}</h1>
+    <vue-markdown class="markdown" :source="post.content">{{post.content}}</vue-markdown>
   </div>
 </template>
 
@@ -12,6 +12,7 @@
   border-radius: 5px;
   display: flex;
   flex-direction: column;
+  overflow: auto;  
   justify-content: flex-start;
 }
 .markdown {
@@ -26,11 +27,14 @@ import VueMarkdown from 'vue-markdown'
 export default {
   created () {
     this.getResource({ url: 'post', id: this.$route.params.id }).then(data => {
-      console.log(data)
+      this.post = data
+      console.log(this.post)
     })
   },
   data () {
-    return {}
+    return {
+      post: {}
+    }
   },
   components: {
     VueMarkdown

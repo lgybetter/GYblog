@@ -2,6 +2,7 @@
   <div class="child-view">
     <h1 class="article-title">{{post.title}}</h1>
     <vue-markdown class="markdown" :source="post.content">{{post.content}}</vue-markdown>
+    <articleMenu></articlemenu>
   </div>
 </template>
 
@@ -29,6 +30,7 @@
 <script>
 import { mapActions } from 'vuex'
 import VueMarkdown from 'vue-markdown'
+import articleMenu from '../components/article-menu'
 
 export default {
   created () {
@@ -43,7 +45,8 @@ export default {
     }
   },
   components: {
-    VueMarkdown
+    VueMarkdown,
+    articleMenu
   },
   methods: {
     ...mapActions(['getResource'])

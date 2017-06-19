@@ -2,7 +2,7 @@
   <div class="child-view">
     <h1 class="article-title">{{post.title}}</h1>
     <vue-markdown class="markdown" :source="post.content">{{post.content}}</vue-markdown>
-    <article-menu></article-menu>
+    <article-menu @actionHandler="test"></article-menu>
   </div>
 </template>
 
@@ -49,7 +49,29 @@ export default {
     articleMenu
   },
   methods: {
-    ...mapActions(['getResource'])
+    ...mapActions(['getResource', 'postResource', 'deleteResource']),
+    test (action) {
+      switch (action) {
+        case 'thumb-up-action':
+          break
+        case 'comment-action':
+          break
+        case 'star-action':
+          this.postResource({
+            url: 'collection',
+            data: {
+              postId: this.post.id
+            }
+          }).then(res => {
+            console.log(res)
+          })
+          break
+        case 'share-action':
+          break
+        default:
+          break
+      }
+    }
   }
 }
 </script>

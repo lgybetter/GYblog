@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="event-menu" @click="showMenu"></div>
-    <div :class="[show ? 'event-item-visiable' : 'event-item-hidden', 'event-item']">
-      <div @click="test(1)"></div>
-      <div @click="test(2)"></div>
-      <div @click="test(3)"></div>
-      <div @click="test(4)"></div>
+    <div :class="[show ? 'event-item-visiable' : 'event-item-hidden', 'event-item']" @click="menuHandler">
+      <div id="thumb-up-action"></div>
+      <div id="comment-action"></div>
+      <div id="star-action"></div>
+      <div id="share-action"></div>
     </div>
   </div>
 </template>
@@ -52,6 +52,24 @@
     height: 50px;
     border-radius: 50%;
     background: white;
+    background: {
+      color: rgb(0, 219, 139);
+        repeat:  no-repeat;
+        position:  center;
+        size: 60% 60%;
+      }
+    }
+  & div:nth-child(1) {
+    background-image:  url('../assets/images/thump-up.png');
+  }
+  & div:nth-child(2) {
+    background-image:  url('../assets/images/comment.png');
+  }
+  & div:nth-child(3) {
+    background-image:  url('../assets/images/star.png'); 
+  }
+  & div:nth-child(4) {
+    background-image:  url('../assets/images/share.png');
   }
 }
 
@@ -107,8 +125,8 @@ export default {
     showMenu () {
       this.show = !this.show
     },
-    test (index) {
-      console.log(index)
+    menuHandler (event) {
+      this.$emit('actionHandler', event.path[0].id)
     }
   }
 }

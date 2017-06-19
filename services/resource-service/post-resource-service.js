@@ -1,4 +1,6 @@
 import BaseResource from './base-resource-service'
+import mongoose from 'mongoose'
+const Collection = mongoose.model('Collection')
 
 class PostResource extends BaseResource {
   query ({ user }) {
@@ -23,6 +25,7 @@ class PostResource extends BaseResource {
   async findById({ params, query, user }) {
     this.queryParams({ query })
     let id = params.id
+    let collected = false
     try {
       // await this.Model.findByIdAndUpdate(params.id, {
       //   $inc: { viewCount: 1 }
@@ -31,7 +34,11 @@ class PostResource extends BaseResource {
       if (!entity) {
         throw new Error('not found') 
       }
-      return this._mongoIdToWebId(entity)
+      let collectCount = await Collection.count({ postId: id, createBy: user._id })
+      let isCollected = collectCount ? true : false
+      let result =  this._mongoIdToWebId(entity)
+      Object.assign(result, { isCollected })
+      return result
     } catch (err) {
       throw new Error({ code: 500, msg: err, level: 'error' }) 
     }

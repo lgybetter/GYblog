@@ -2,13 +2,13 @@
   <div class="container home-view">
     <div class="information-box" v-show="showInfo">
       <navigator :token="token"></navigator>
-      <informationsContainer :infomation="user" @infoHandler="infoHandler"></informationsContainer>
+      <informations-container :infomation="user" @infoHandler="infoHandler"></informations-container>
     </div>
-    <navigatorColumn v-show="!showInfo" @navColumnHandler="navColumnHandler"></navigatorcolumn>
+    <navigator-column v-show="!showInfo" @navColumnHandler="navColumnHandler"></navigator-column>
     <div v-bind:class="{'content-layout': showInfo, 'content-bar-layout': !showInfo}">
       <div class="article-stack-view">
         <template v-for="(post, index) in post.objects">
-          <articleCard :article="post" :index="index"></articlecard>
+          <article-card :article="post" :index="index"></article-card>
         </template>
       </div>
     </div>

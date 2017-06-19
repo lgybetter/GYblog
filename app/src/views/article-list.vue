@@ -1,7 +1,7 @@
 <template>
   <div class="article-stack-view">
     <template v-for="(post, index) in post.objects">
-      <articleCard :article="post" :index="index"></articlecard>
+      <article-card :article="post" :index="index"></article-card>
     </template>
   </div>
 </template>

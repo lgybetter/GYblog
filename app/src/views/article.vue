@@ -2,7 +2,7 @@
   <div class="child-view">
     <h1 class="article-title">{{post.title}}</h1>
     <vue-markdown class="markdown" :source="post.content">{{post.content}}</vue-markdown>
-    <articleMenu></articlemenu>
+    <article-menu></article-menu>
   </div>
 </template>
 

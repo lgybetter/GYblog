@@ -1,10 +1,14 @@
 <template>
   <div class="container home-view">
-    <div class="information-box" v-show="showInfo">
-      <navigator :token="token"></navigator>
-      <informationsContainer :infomation="user" @infoHandler="infoHandler"></informationsContainer>
-    </div>
-    <navigatorColumn v-show="!showInfo" @navColumnHandler="navColumnHandler"></navigatorcolumn>
+    <transition name="fade">
+      <div class="information-box" v-show="showInfo">
+        <navigator :token="token"></navigator>
+        <informations-container :infomation="user" @infoHandler="infoHandler"></informations-container>
+      </div>
+    </transition>
+    <transition name="fade">    
+    <navigator-column v-show="!showInfo" @navColumnHandler="navColumnHandler"></navigator-column>
+    </transition>    
     <div v-bind:class="{'content-layout': showInfo, 'content-bar-layout': !showInfo}">
       <router-view></router-view>
     </div>

@@ -1,8 +1,10 @@
 <template>
   <div class="article-stack-view">
-    <template v-for="(post, index) in post.objects">
-      <article-card :article="post" :index="index"></article-card>
-    </template>
+    <div>
+      <template v-for="(post, index) in post.objects">
+        <article-card :article="post" :index="index"></article-card>
+      </template>
+    </div>
   </div>
 </template>
 
@@ -33,6 +35,6 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 @import '../assets/styles/home.scss';
 </style>

@@ -7,7 +7,7 @@
       </div>
     </transition>
     <transition name="fade">    
-    <navigator-column v-show="!showInfo" @navColumnHandler="navColumnHandler"></navigator-column>
+      <navigator-column v-show="!showInfo" @navColumnHandler="navColumnHandler"></navigator-column>
     </transition>    
     <div v-bind:class="{'content-layout': showInfo, 'content-bar-layout': !showInfo}">
       <router-view></router-view>

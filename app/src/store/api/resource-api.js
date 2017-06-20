@@ -34,6 +34,6 @@ export default {
     return Vue.http.put(`${config.authUrl}/${url}/${id}`, data, config.options).then(res => res.body)
   },
   deleteResource ({ url, id }) {
-    return Vue.http.delete(`${config.authUrl}/${url}/${id}`, config.options).then(res => res.bdoy)
+    return Vue.http.delete(`${config.authUrl}/${url}/${id}`, config.options).then(res => res.body)
   }
 }

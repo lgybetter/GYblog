@@ -33,7 +33,7 @@ class CollectionResource extends BaseResource {
   }
   
   async findByIdAndRemove({ params, body, query, user }) {
-    let postId = body.postId
+    let postId = params.id || query.id
     if (!postId) {
       throw new Error({ code: 400, msg: 'required postId', level: 'error' })       
     }

@@ -2,7 +2,7 @@
   <div class="child-view">
     <h1 class="article-title">{{post.title}}</h1>
     <vue-markdown class="markdown" :source="post.content">{{post.content}}</vue-markdown>
-    <article-menu @actionHandler="test"></article-menu>
+    <article-menu @actionHandler="test" :state="state"></article-menu>
   </div>
 </template>
 
@@ -36,12 +36,18 @@ export default {
   created () {
     this.getResource({ url: 'post', id: this.$route.params.id }).then(data => {
       this.post = data
-      console.log(this.post)
+      this.state.star = this.post.isCollected
     })
   },
   data () {
     return {
-      post: {}
+      post: {},
+      state: {
+        star: false,
+        thumpUp: false,
+        comment: false,
+        share: false
+      }
     }
   },
   components: {
@@ -57,14 +63,31 @@ export default {
         case 'comment-action':
           break
         case 'star-action':
-          this.postResource({
-            url: 'collection',
-            data: {
-              postId: this.post.id
-            }
-          }).then(res => {
-            console.log(res)
-          })
+          if (!this.state.star) {
+            this.postResource({
+              url: 'collection',
+              data: {
+                postId: this.post.id
+              }
+            }).then(data => {
+              if (data.id) {
+                this.state.star = true
+              } else {
+                console.log('收藏失败')
+              }
+            })
+          } else {
+            this.deleteResource({
+              url: 'collection',
+              id: this.post.id
+            }).then(data => {
+              if (data.id) {
+                this.state.star = false
+              } else {
+                console.log('取消收藏失败')
+              }
+            })
+          }
           break
         case 'share-action':
           break

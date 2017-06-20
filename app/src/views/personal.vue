@@ -1,10 +1,14 @@
 <template>
   <div class="container home-view">
-    <div class="information-box" v-show="showInfo">
-      <navigator :token="token"></navigator>
-      <informations-container :infomation="user" @infoHandler="infoHandler"></informations-container>
-    </div>
-    <navigator-column v-show="!showInfo" @navColumnHandler="navColumnHandler"></navigator-column>
+    <transition name="fade">
+      <div class="information-box" v-show="showInfo">
+        <navigator :token="token"></navigator>
+        <informations-container :infomation="user" @infoHandler="infoHandler"></informations-container>
+      </div>
+    </transition>
+    <transition name="fade">    
+      <navigator-column v-show="!showInfo" @navColumnHandler="navColumnHandler"></navigator-column>
+    </transition>
     <div v-bind:class="{'content-layout': showInfo, 'content-bar-layout': !showInfo}">
       <div class="article-stack-view">
         <template v-for="(post, index) in post.objects">

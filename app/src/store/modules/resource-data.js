@@ -15,28 +15,28 @@ const actions = {
       if (data.date) {
         data.date = moment(data.date).format('YYYY-MM-DD HH:mm:ss')
       }
-      return Promise.resolve(data)
+      return Promise.resolve(data || {})
     })
   },
   queryResource ({ commit }, { url, args }) {
     return resourceApi.queryResource({ url, args }).then(data => {
       commit(types.RESOURCE_DATA, { url, data })
-      return Promise.resolve(data)
+      return Promise.resolve(data || {})
     })
   },
   postResource ({ commit }, { url, data }) {
     return resourceApi.postResource({ url, data }).then(data => {
-      return Promise.resolve(data)
+      return Promise.resolve(data || {})
     })
   },
   putResource ({ commit }, { url, id, data }) {
     return resourceApi.putResource({ url, id, data }).then(data => {
-      return Promise.resolve(data)
+      return Promise.resolve(data || {})
     })
   },
   deleteResource ({ commit }, { url, id }) {
     return resourceApi.deleteResource({ url, id }).then(data => {
-      return Promise.resolve(data)
+      return Promise.resolve(data || {})
     })
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="information-box-container">
-    <div class="information-picture-box" @click="toSetting">
+    <div class="information-picture-box" @click="routerChange('/setting')">
       <img :src="icon"/>
     </div>
     <div class="information-introduction">
@@ -11,7 +11,7 @@
       <p>{{infomation.introduction || 'This user is lazy, nothing left'}}</p>
     </div>
     <div class="info-btn-container">
-      <a class="go-home-btn" href="/"/>
+      <a class="go-home-btn" @click="routerChange('/')"/>
       <a class="go-github-btn" href="https://github.com/lgybetter" target="_Blank"/>
     </div>
   </div>
@@ -34,8 +34,8 @@ export default {
     infoHandler () {
       this.$emit('infoHandler')
     },
-    toSetting () {
-      this.$router.push('/setting')
+    routerChange (router) {
+      this.$router.push(router)
     }
   },
   data () {

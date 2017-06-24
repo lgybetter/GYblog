@@ -40,7 +40,7 @@
 }
 
 .event-item {
-  position: fixed;
+  position: absolute;
   height: 400px;
   width: 50px;
   right: 110px;

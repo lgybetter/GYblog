@@ -96,6 +96,12 @@
     width: 600px;
     height: 60px;
     background-color: #008f5b;
+    line-height: 2.5;
+    font: {
+      size: 22px;
+      weight: bold;
+    }
+    text-align: center;
   }
   .label-box-container {
     display: flex;

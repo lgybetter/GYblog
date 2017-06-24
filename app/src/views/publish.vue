@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="alert-box" v-show="selectFlag">
-      <div class="label-topic"></div>
+      <div class="label-topic">Choose Label</div>
       <div class="label-box-container">
         <template v-for="(labelOption, index) in labelOptions">
           <template v-if="labelOption !== ''">

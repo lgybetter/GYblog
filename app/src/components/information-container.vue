@@ -1,6 +1,6 @@
 <template>
   <div class="information-box-container">
-    <div class="information-picture-box">
+    <div class="information-picture-box" @click="toSetting">
       <img :src="icon"/>
     </div>
     <div class="information-introduction">
@@ -9,6 +9,10 @@
       </div>
       <h1>{{infomation.name}}</h1>
       <p>{{infomation.introduction || 'This user is lazy, nothing left'}}</p>
+    </div>
+    <div class="info-btn-container">
+      <a class="go-home-btn" href="/"/>
+      <a class="go-github-btn" href="https://github.com/lgybetter" target="_Blank"/>
     </div>
   </div>
 </template>
@@ -29,6 +33,9 @@ export default {
   methods: {
     infoHandler () {
       this.$emit('infoHandler')
+    },
+    toSetting () {
+      this.$router.push('/setting')
     }
   },
   data () {
@@ -43,6 +50,7 @@ export default {
 <style lang="scss">
 
 .information-box-container {
+  height: 100%;
   display: flex;
   flex-direction: column;
   .information-picture-box {
@@ -60,6 +68,7 @@ export default {
     width: 320px;
     cursor: default;
     user-select: none;
+
     .hide-info {
       width: 72px;
       height: 72px;
@@ -76,6 +85,29 @@ export default {
     }
     p {
       font-size: 1.6rem;
+    }
+  }
+  .info-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 250px 0 0 0;
+    a {
+      bottom: 0px;
+      width: 60px;
+      height: 60px;
+      background: {
+        repeat:  no-repeat;
+        position:  center;
+        size: 60% 60%;
+      }
+    }
+    .go-home-btn {
+      background-image:  url('../assets/images/home.png');
+    }
+    .go-github-btn {
+      background-image:  url('../assets/images/github.png');
     }
   }
 }

@@ -3,7 +3,7 @@
     <div class="text-view-container">
       <div class="head-picure-introduction-view">
         <div class="head-picture-box">
-          <img :src="icon"/>
+          <img src="http://os32fgzvj.bkt.clouddn.com/head-picture.jpg"/>
         </div>
         <div>
           <textarea v-model="userMsg.introduction" class="textarea" placeholder="Introduce yourself here..."></textarea>
@@ -42,7 +42,6 @@
 </template>
 
 <script>
-import headPicture from '../assets/images/head-picture.jpg'
 import navigatorColumn from '../components/navigator-column'
 import { mapActions, mapGetters } from 'vuex'
 
@@ -77,8 +76,7 @@ export default {
         icon: '',
         job: '',
         github: ''
-      },
-      icon: headPicture
+      }
     }
   }
 }

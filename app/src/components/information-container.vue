@@ -1,7 +1,7 @@
 <template>
   <div class="information-box-container">
     <div class="information-picture-box" @click="routerChange('/setting')">
-      <img :src="icon"/>
+      <img src="http://os32fgzvj.bkt.clouddn.com/head-picture.jpg"/>
     </div>
     <div class="information-introduction">
       <div class="hide-info" @click="infoHandler">
@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import headPicture from '../assets/images/head-picture.jpg'
 import hideInfo from '../assets/images/ic_first_page_white_36dp_2x.png'
 
 export default {
@@ -40,7 +39,6 @@ export default {
   },
   data () {
     return {
-      icon: headPicture,
       hideInfo: hideInfo
     }
   }

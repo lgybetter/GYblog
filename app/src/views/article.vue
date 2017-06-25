@@ -38,7 +38,7 @@
 
   .markdown {
     width: 80%;
-    color: whitesmoke;
+    color: #ccc;
     font-size: 20px;
   }
 }

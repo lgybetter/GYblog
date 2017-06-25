@@ -49,6 +49,11 @@ export default new Router({
           path: '/article/:id',
           name: 'atricle',
           component: article
+        },
+        {
+          path: '/article/edit/:id',
+          name: 'editArticle',
+          component: publish
         }
       ]
     },

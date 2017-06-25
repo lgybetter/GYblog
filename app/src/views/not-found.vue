@@ -6,7 +6,7 @@
 export default {
   mounted () {
     setTimeout(() => {
-      this.$router.replace({path: '/'})
+      this.$router.back()
     }, 1000)
   }
 }

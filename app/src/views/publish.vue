@@ -4,7 +4,7 @@
       <div class="title-submit-box">
         <input type="text" class="title-text" v-model="post.title" placeholder="input the title"/>
         <checkbox :checked="post.open" @change="handleCheck"></checkbox>
-        <input type="submit"  @click="publish" value="Publish" class="button"/>
+        <input type="submit"  @click="publish" :value="$route.name === 'editArticle' ? 'Save' : 'Publish'" class="button"/>
       </div>
       <input type="text" class="subtitle-text" v-model="post.subTitle" placeholder="input the sub title"/>        
       <textarea class="text-box" @keydown="keyDown" v-model="post.content" placeholder="write the aritcle with markdown and check the toggle button to select whether to open this article"></textarea>
@@ -45,6 +45,16 @@ export default {
     navgatorColumn,
     checkbox
   },
+  created () {
+    if (this.$route.name === 'editArticle') {
+      this.getResource({
+        url: 'post',
+        id: this.$route.params.id
+      }).then(res => {
+        this.post = res
+      })
+    }
+  },
   data () {
     return {
       post: {
@@ -80,7 +90,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['postResource']),
+    ...mapActions(['postResource', 'getResource', 'putResource']),
     selectLabel (index) {
       this.currentIndex = index
       this.selectFlag = !this.selectFlag
@@ -96,11 +106,19 @@ export default {
       this.labels[this.currentIndex].text = label || this.defaultLabels[this.currentIndex]
     },
     publish () {
-      this.postResource({ url: 'post', data: this.post }).then(data => {
-        if (data.id) {
-          this.$router.push('/')
-        }
-      })
+      if (this.$route.name === 'editArticle') {
+        this.putResource({ url: 'post', data: this.post, id: this.$route.params.id }).then(data => {
+          if (data.id) {
+            this.$router.push('/')
+          }
+        })
+      } else {
+        this.postResource({ url: 'post', data: this.post }).then(data => {
+          if (data.id) {
+            this.$router.push('/')
+          }
+        })
+      }
     },
     handleCheck (val) {
       this.post.open = val

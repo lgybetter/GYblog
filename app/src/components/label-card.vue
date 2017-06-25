@@ -1,5 +1,5 @@
 <template>
-  <div class="label" @click="emitClick">
+  <div :class="[{'action-label': action},'label']" @click="emitClick">
     <img :src="icon"></img>
     <span>{{tip}}</span>
   </div>
@@ -7,7 +7,16 @@
 
 <script>
   export default {
-    props: ['icon', 'tip'],
+    props: {
+      icon: {},
+      tip: {},
+      action: {
+        type: Boolean,
+        default () {
+          return false
+        }
+      }
+    },
     methods: {
       emitClick () {
         this.$emit('clickEvent')
@@ -30,7 +39,6 @@
     min-width: 35px;
     color: white;
     font-size: 16px;
-    background: rgb(0, 219, 139);
     border-radius: 3px;
     white-space:nowrap;
   }
@@ -39,6 +47,12 @@
     width: 25px;
     height: 25px;
     margin-right: 5px;
+  }
+}
+
+.action-label {
+  span {
+    background: rgb(0, 219, 139);    
   }
 }
 

@@ -7,7 +7,9 @@
       <label-card :tip="post.thumbUpCount" :icon="thumbUp"></label-card>      
       <label-card :tip="post.shareCount" :icon="share"></label-card>      
       <label-card :tip="post.commentCount" :icon="comment"></label-card>      
-      <label-card :tip="post.date" :icon="date"></label-card>            
+      <label-card :tip="post.date" :icon="date"></label-card>           
+      <label-card :action="true" tip="Edit" :icon="edit"></label-card>     
+      <label-card :action="true" tip="Delete" :icon="del"></label-card>           
     </div>
     <vue-markdown class="markdown" :source="post.content">{{post.content}}</vue-markdown>
     <article-menu @actionHandler="actionHandler" :state="state"></article-menu>
@@ -54,11 +56,12 @@ import shareIcon from '../assets/images/share-active.png'
 import commentIcon from '../assets/images/comment-active.png'
 import authorIcon from '../assets/images/author-active.png'
 import dateIcon from '../assets/images/date-active.png'
+import editIcon from '../assets/images/edit-active.png'
+import deleteIcon from '../assets/images/delete-active.png'
 
 export default {
   async created () {
     await this.getResource({ url: 'post', id: this.$route.params.id })
-    console.log(this.post)
     this.state.star = this.post.isCollected
   },
   computed: {
@@ -77,7 +80,9 @@ export default {
       share: shareIcon,
       comment: commentIcon,
       author: authorIcon,
-      date: dateIcon
+      date: dateIcon,
+      del: deleteIcon,
+      edit: editIcon
     }
   },
   components: {

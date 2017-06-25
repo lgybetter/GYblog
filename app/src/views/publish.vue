@@ -7,7 +7,7 @@
         <input type="submit"  @click="publish" value="Publish" class="button"/>
       </div>
       <input type="text" class="subtitle-text" v-model="post.subTitle" placeholder="input the sub title"/>        
-      <textarea class="text-box" v-model="post.content" placeholder="write the aritcle with markdown and check the toggle button to select whether to open this article"></textarea>
+      <textarea class="text-box" @keydown="keyDown" v-model="post.content" placeholder="write the aritcle with markdown and check the toggle button to select whether to open this article"></textarea>
       <div class="label-view">
         <template v-for="(label, index) in labels">
           <input @click="selectLabel(index)" :value="label.text" type="button" :class="['button', 'label-selector', label.style]"/>
@@ -104,6 +104,10 @@ export default {
     },
     handleCheck (val) {
       this.post.open = val
+    },
+    keyDown (event) {
+      if (event.keyCode === 9) {
+      }
     }
   }
 }

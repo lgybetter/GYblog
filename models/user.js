@@ -9,6 +9,7 @@ const UsersSchema = new Schema({
   email: { type: String, unique: true, required: true },
   password: { type: String, required: true },
   icon: { type: String },
+  github: { type: String, default: 'https://github.com' },
   date: { type: Date, default: Date.now() }
 })
 

@@ -12,7 +12,7 @@
     </div>
     <div class="info-btn-container">
       <a class="go-home-btn" @click="routerChange('/')"/>
-      <a class="go-github-btn" href="https://github.com/lgybetter" target="_Blank"/>
+      <a class="go-github-btn" :href="infomation.github" target="_Blank"/>
     </div>
   </div>
 </template>
@@ -97,6 +97,7 @@ export default {
       bottom: 0px;
       width: 60px;
       height: 60px;
+      cursor: pointer;
       background: {
         repeat:  no-repeat;
         position:  center;

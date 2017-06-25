@@ -24,6 +24,12 @@
         </div>
         <div class="a-line-display">
           <div>
+            <p>GitHub:</p>
+          </div>
+          <input type="text" v-model="userMsg.github" class="text-box" />
+        </div>
+        <div class="a-line-display">
+          <div>
             <p>Job Occupation:</p>
           </div>
           <input type="text" v-model="userMsg.job" class="text-box" />
@@ -69,7 +75,8 @@ export default {
         phone: '',
         introduction: '',
         icon: '',
-        job: ''
+        job: '',
+        github: ''
       },
       icon: headPicture
     }

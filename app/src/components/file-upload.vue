@@ -39,7 +39,7 @@ export default {
     }
   },
   methods: {
-    upload (event) {
+    async upload (event) {
       let file = event.target.files[0]
       let fileName = file.name
       let self = this
@@ -53,24 +53,23 @@ export default {
         }
         let formData = new FormData()
         formData.append('file', file)
-        this.$http.get(`http://localhost:3001/api/auth/uptoken/?fileName=${fileName}`, authMsg).then(res => {
-          let data = res.body
-          formData.append('token', data.uptoken)
-          formData.append('key', data.key)
-          this.$http.post('http://up-z2.qiniu.com/', formData, {
-            progress (event) {
-              self.$emit('progress', parseFloat(event.loaded / event.total * 100), flag)
-            }
-          }).then(res => {
-            data = res.body
-            if (data.hash && data.key) {
-              this.$emit('complete', 200, data, flag)
-              event.target.value = null
-            } else {
-              this.$emit('complete', 500, data, flag)
-            }
-          }, error => self.$emit('complete', 500, error.message), flag)
+        let res = await this.$http.get(`http://localhost:3001/api/auth/uptoken/?fileName=${fileName}`, authMsg)
+        let data = res.body
+        formData.append('token', data.uptoken)
+        formData.append('key', data.key)
+        let uploadRes = await this.$http.post('http://up-z2.qiniu.com/', formData, {
+          progress (event) {
+            self.$emit('progress', parseFloat(event.loaded / event.total * 100), flag)
+          }
         })
+        let _data = uploadRes.body
+        let url = data.url + _data.key
+        if (_data.hash && _data.key) {
+          this.$emit('uploadSuccess', url)
+          event.target.value = null
+        } else {
+          this.$emit('uploadFail')
+        }
       }
     }
   }

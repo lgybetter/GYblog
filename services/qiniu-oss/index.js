@@ -7,6 +7,7 @@ qiniu.conf.SECRET_KEY = nconf.get('qiniu').SECRET_KEY
 
 const getUptoken = (req, res, next) => {
   let key = crypto.createHash('md5').update(((new Date()) * 1 + Math.floor(Math.random() * 10).toString())).digest('hex') + '-' + req.query.fileName
+  let url = nconf.get('qiniu').Domain
   let uptoken = new qiniu.rs.PutPolicy(nconf.get('qiniu').Bucket_Name + ':' + key)
   let token = uptoken.token()
   res.header("Cache-Control", "max-age=0, private, must-revalidate")
@@ -15,7 +16,8 @@ const getUptoken = (req, res, next) => {
   if (token) {
     res.json({
       uptoken: token,
-      key: key
+      key,
+      url
     })
   }
 }

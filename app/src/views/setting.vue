@@ -3,8 +3,8 @@
     <div class="text-view-container">
       <div class="head-picure-introduction-view">
         <div class="head-picture-box">
-          <img src="http://os32fgzvj.bkt.clouddn.com/head-picture.jpg"/>
-          <file-upload class="file-upload"></file-upload>
+          <img :src="userMsg.icon"/>
+          <file-upload @uploadSuccess="uploadSuccess" @uploadFail="uploadFail" class="file-upload"></file-upload>
         </div>
         <div>
           <textarea v-model="userMsg.introduction" class="textarea" placeholder="Introduce yourself here..."></textarea>
@@ -68,6 +68,13 @@ export default {
     save () {
       this.updateUser({ user: this.userMsg }).then(res => {
       })
+    },
+    uploadFail () {
+      console.log('upload fail')
+    },
+    async uploadSuccess (url) {
+      this.userMsg.icon = url
+      await this.updateUser({ user: this.userMsg })
     }
   },
   data () {

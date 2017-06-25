@@ -1,7 +1,7 @@
 <template>
   <div class="information-box-container">
     <div class="information-picture-box" @click="routerChange('/setting')">
-      <img src="http://os32fgzvj.bkt.clouddn.com/head-picture.jpg"/>
+      <img :src="infomation.icon"/>
     </div>
     <div class="information-introduction">
       <div class="hide-info" @click="infoHandler">

@@ -88,19 +88,19 @@
 .event-item-visiable {
   & div:nth-child(1) {
     top: 80px;
-    -webkit-transition: top 0.5s ease-in 0.1s;
+    -webkit-transition: top 0.2s ease-in 0.05s;
   }
   & div:nth-child(2) {
     top: 150px;
-    -webkit-transition: top 0.5s ease-in 0.2s;
+    -webkit-transition: top 0.2s ease-in 0.1s;
   }
   & div:nth-child(3) {
     top: 220px;
-    -webkit-transition: top 0.5s ease-in 0.3s;
+    -webkit-transition: top 0.2s ease-in 0.15s;
   }
   & div:nth-child(4) {
     top: 290px;
-    -webkit-transition: top 0.5s ease-in 0.4s;
+    -webkit-transition: top 0.2s ease-in 0.2s;
   }
 }
 
@@ -109,16 +109,16 @@
     top: 0;
   }
   & div:nth-child(1) {
-    -webkit-transition: top 0.5s ease-out 0.4s;
+    -webkit-transition: top 0.2s ease-out 0.2s;
   }
   & div:nth-child(2) {
-    -webkit-transition: top 0.5s ease-out 0.3s;
+    -webkit-transition: top 0.2s ease-out 0.15s;
   }
   & div:nth-child(3) {
-    -webkit-transition: top 0.5s ease-out 0.2s;
+    -webkit-transition: top 0.2s ease-out 0.1s;
   }
   & div:nth-child(4) {
-    -webkit-transition: top 0.5s ease-out 0.1s;
+    -webkit-transition: top 0.2s ease-out 0.05s;
   }
 }
 

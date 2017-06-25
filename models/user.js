@@ -8,7 +8,7 @@ const UsersSchema = new Schema({
   job: { type: String },
   email: { type: String, unique: true, required: true },
   password: { type: String, required: true },
-  icon: { type: String },
+  icon: { type: String, default: 'http://os32fgzvj.bkt.clouddn.com/012489fbdca023b5de1f5ddb41e15f61-head-picture.jpg'},
   github: { type: String, default: 'https://github.com' },
   date: { type: Date, default: Date.now() }
 })

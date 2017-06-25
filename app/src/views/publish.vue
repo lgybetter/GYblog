@@ -49,6 +49,7 @@ export default {
     return {
       post: {
         title: '',
+        subTitle: '',
         content: '',
         open: false
       },

@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
   title: { type: String, required: true },
+  subTitle: { type: String, required: true },
   createBy: { type: Schema.Types.ObjectId, ref: 'Users' },
   date: { type: Date, default: Date.now },
   content: { type: String, required: true },

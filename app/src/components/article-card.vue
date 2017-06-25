@@ -7,7 +7,7 @@
       <div class="article-text-box">
         <h1>{{article.title}}</h1>
         <h2>{{article.date}}</h2>
-        <p>{{article.content}}</p>
+        <p>{{article.subTitle}}</p>
       </div>
     </div>
     <div class="article-box-navigation">

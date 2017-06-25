@@ -9,23 +9,31 @@ const createUser = (data) => {
 }
 
 const removeUser = (id) => {
-  return Users.findByIdAndRemove(id)
+  return Users.findByIdAndRemove(id).select({
+    password: 0
+  })
 }
 
 const updateUser = async (id, data) => {
   await Users.findByIdAndUpdate(id, data)
-  return Users.findById(id)
+  return Users.findById(id).select({
+    password: 0
+  })
 }
 
 const queryUsers = () => {
-  return Users.find({})
+  return Users.find({}).select({
+    password: 0
+  })
 }
 
 const findUser = (id, _id) => {
   if (id !== _id) {
     throw new Error('can not found other user info')
   }
-  return Users.findById(id)
+  return Users.findById(id).select({
+    password: 0
+  })
 }
 
 const verifyUser = (data) => {

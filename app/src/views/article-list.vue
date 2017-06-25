@@ -1,7 +1,7 @@
 <template>
   <div class="article-stack-view">
     <div>
-      <template v-for="(post, index) in post.objects">
+      <template v-for="(post, index) in posts.objects">
         <article-card :article="post" :index="index"></article-card>
       </template>
     </div>
@@ -15,7 +15,7 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters(['user', 'post', 'token'])
+    ...mapGetters(['user', 'posts', 'token'])
   },
   methods: {
     ...mapActions(['queryResource'])

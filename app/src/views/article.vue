@@ -1,62 +1,96 @@
 <template>
   <div class="child-view">
     <h1 class="article-title">{{post.title}}</h1>
+    <div class="article-info-container">
+      <label-card @clickEvent="changeRouter(`/personal/${post.createBy._id}`)" :tip="post.createBy.name" :icon="author"></label-card>            
+      <label-card :tip="post.starCount" :icon="star"></label-card>
+      <label-card :tip="post.thumbUpCount" :icon="thumbUp"></label-card>      
+      <label-card :tip="post.shareCount" :icon="share"></label-card>      
+      <label-card :tip="post.commentCount" :icon="comment"></label-card>      
+      <label-card :tip="post.date" :icon="date"></label-card>            
+    </div>
     <vue-markdown class="markdown" :source="post.content">{{post.content}}</vue-markdown>
-    <article-menu @actionHandler="test" :state="state"></article-menu>
+    <article-menu @actionHandler="actionHandler" :state="state"></article-menu>
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 @import '../assets/styles/article.scss';
 .child-view {
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  .article-info-container {
+    display: flex;
+    justify-content: center;
+    width: 78%;
+    height: 40px;
+    margin: 10px 0 10px 0;
+  }
+
+  .article-title {
+    color: white;
+    font-size: 35px;
+  }
+
+  .markdown {
+    width: 80%;
+    color: whitesmoke;
+    font-size: 20px;
+  }
 }
 
-.article-title {
-  color: white;
-  font-size: 35px;
-}
-
-.markdown {
-  width: 85%;
-  color: whitesmoke;
-  font-size: 14px;
-}
 </style>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import VueMarkdown from 'vue-markdown'
 import articleMenu from '../components/article-menu'
+import labelCard from '../components/label-card'
+import starIcon from '../assets/images/star-active.png'
+import thumbUpIcon from '../assets/images/thump-up-active.png'
+import shareIcon from '../assets/images/share-active.png'
+import commentIcon from '../assets/images/comment-active.png'
+import authorIcon from '../assets/images/author-active.png'
+import dateIcon from '../assets/images/date-active.png'
 
 export default {
-  created () {
-    this.getResource({ url: 'post', id: this.$route.params.id }).then(data => {
-      this.post = data
-      this.state.star = this.post.isCollected
-    })
+  async created () {
+    await this.getResource({ url: 'post', id: this.$route.params.id })
+    console.log(this.post)
+    this.state.star = this.post.isCollected
+  },
+  computed: {
+    ...mapGetters(['post'])
   },
   data () {
     return {
-      post: {},
       state: {
         star: false,
         thumpUp: false,
         comment: false,
         share: false
-      }
+      },
+      star: starIcon,
+      thumbUp: thumbUpIcon,
+      share: shareIcon,
+      comment: commentIcon,
+      author: authorIcon,
+      date: dateIcon
     }
   },
   components: {
     VueMarkdown,
-    articleMenu
+    articleMenu,
+    labelCard
   },
   methods: {
     ...mapActions(['getResource', 'postResource', 'deleteResource']),
-    test (action) {
+    changeRouter (path) {
+      this.$router.push(path)
+    },
+    actionHandler (action) {
       switch (action) {
         case 'thumb-up-action':
           break
@@ -75,6 +109,8 @@ export default {
               } else {
                 console.log('收藏失败')
               }
+            }).then(() => {
+              this.getResource({ url: 'post', id: this.$route.params.id })
             })
           } else {
             this.deleteResource({
@@ -86,6 +122,8 @@ export default {
               } else {
                 console.log('取消收藏失败')
               }
+            }).then(() => {
+              this.getResource({ url: 'post', id: this.$route.params.id })
             })
           }
           break

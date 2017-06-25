@@ -6,7 +6,7 @@ class PostResource extends BaseResource {
   query ({ user }) {
     this.filters = this.filters || {}
     this.filters = Object.assign(this.filters, { "$or": [{ open: true }, { createBy: user._id }]})
-    this.listQuery = this.Model.find(this.filters).select(this.selectField).populate({ path: 'tags comments' }).select(this.selectField).limit(this.limit).skip(this.skip).sort(this.sort)
+    this.listQuery = this.Model.find(this.filters).populate({ path: 'tags comments' }).select(this.selectField).limit(this.limit).skip(this.skip).sort(this.sort)
   }
 
   async create ({ body, user }) {
@@ -30,7 +30,10 @@ class PostResource extends BaseResource {
       // await this.Model.findByIdAndUpdate(params.id, {
       //   $inc: { viewCount: 1 }
       // })
-      let entity = await this.Model.findOneAndUpdate({ _id: id, createBy: user._id }, { '$inc': { viewCount: 1 } }).select(this.selectField) 
+      let entity = await this.Model.findOneAndUpdate({ _id: id, createBy: user._id }, { '$inc': { viewCount: 1 } }).populate({
+        path: 'createBy',
+        select: 'name'
+      }).select(this.selectField)
       if (!entity) {
         throw new Error('not found') 
       }
@@ -50,7 +53,10 @@ class PostResource extends BaseResource {
     let data = body
     this.queryParams({ query, user })     
     try {
-      let entity = await this.Model.findOneAndUpdate({ _id: id, createBy: user._id }, data).select(this.selectField) 
+      let entity = await this.Model.findOneAndUpdate({ _id: id, createBy: user._id }, data).populate({
+        path: 'createBy',
+        select: 'name'
+      }).select(this.selectField)
       if (!entity) {
         throw new Error('not found') 
       }
@@ -65,7 +71,10 @@ class PostResource extends BaseResource {
     let id = params.id 
     this.queryParams({ query, user })     
     try {
-      let entity = await this.Model.findOneAndRemove({ _id: id, createBy: user._id }).select(this.selectField) 
+      let entity = await this.Model.findOneAndRemove({ _id: id, createBy: user._id }).populate({
+        path: 'createBy',
+        select: 'name'
+      }).select(this.selectField) 
       if (!entity) {
         throw new Error('not found') 
       }

@@ -3,18 +3,21 @@ import resourceApi from '../api/resource-api'
 import moment from 'moment'
 
 const state = {
-  post: {
+  posts: {
     objects: [],
     count: 0
+  },
+  post: {
+    createBy: {
+      name: ''
+    }
   }
 }
 
 const actions = {
   getResource ({ commit }, { url, id }) {
     return resourceApi.getResource({ url, id }).then(data => {
-      if (data.date) {
-        data.date = moment(data.date).format('YYYY-MM-DD HH:mm:ss')
-      }
+      commit(types.RESOURCE_SINGLE_DATA, { url, data })
       return Promise.resolve(data || {})
     })
   },
@@ -42,6 +45,7 @@ const actions = {
 }
 
 const getters = {
+  posts: state => state.posts,
   post: state => state.post
 }
 
@@ -53,6 +57,12 @@ const mutations = {
           doc.date = moment(doc.date).format('YYYY-MM-DD HH:mm:ss')
         }
       })
+    }
+    state[url + 's'] = data
+  },
+  [types.RESOURCE_SINGLE_DATA] (state, { url, data }) {
+    if (data.date) {
+      data.date = moment(data.date).format('YYYY-MM-DD HH:mm:ss')
     }
     state[url] = data
   }

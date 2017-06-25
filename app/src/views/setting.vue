@@ -4,6 +4,7 @@
       <div class="head-picure-introduction-view">
         <div class="head-picture-box">
           <img src="http://os32fgzvj.bkt.clouddn.com/head-picture.jpg"/>
+          <file-upload class="file-upload"></file-upload>
         </div>
         <div>
           <textarea v-model="userMsg.introduction" class="textarea" placeholder="Introduce yourself here..."></textarea>
@@ -43,6 +44,7 @@
 
 <script>
 import navigatorColumn from '../components/navigator-column'
+import fileUpload from '../components/file-upload'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
@@ -50,7 +52,8 @@ export default {
     ...mapGetters(['user'])
   },
   components: {
-    navigatorColumn
+    navigatorColumn,
+    fileUpload
   },
   created () {
     this.userInfo({ id: this.user._id }).then(data => {
@@ -90,4 +93,5 @@ export default {
   @extend .button;
   margin: 20px 20px 20px 0;
 }
+
 </style>

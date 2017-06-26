@@ -8,6 +8,7 @@ import notFound from '@/views/not-found'
 import articleList from '@/views/article-list'
 import personal from '@/views/personal'
 import article from '@/views/article'
+import stars from '@/views/stars'
 
 Vue.use(Router)
 
@@ -54,6 +55,11 @@ export default new Router({
           path: '/article/edit/:id',
           name: 'editArticle',
           component: publish
+        },
+        {
+          path: '/stars',
+          name: 'stars',
+          component: stars
         }
       ]
     },

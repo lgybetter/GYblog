@@ -42,8 +42,9 @@ class PostResource extends BaseResource {
       let isCollected = collectCount ? true : false
       let thumbUpCount = await ThumbUp.count({ postId: id, createBy: user._id })
       let isThumbUped = thumbUpCount ? true : false
+      let isSelf = entity.createBy._id.toString() === user._id.toString() ? true : false
       let result =  this._mongoIdToWebId(entity)
-      Object.assign(result, { isCollected, isThumbUped })
+      Object.assign(result, { isCollected, isThumbUped, isSelf })
       return result
     } catch (err) {
       throw new Error({ code: 500, msg: err, level: 'error' }) 

@@ -1,10 +1,8 @@
 <template>
   <div class="article-stack-view">
-    <div>
-      <template v-for="(post, index) in posts.objects">
-        <article-card :article="post" :index="index"></article-card>
-      </template>
-    </div>
+    <template v-for="(post, index) in posts.objects">
+      <article-card :article="post" :index="index"></article-card>
+    </template>
   </div>
 </template>
 

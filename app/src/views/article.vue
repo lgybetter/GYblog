@@ -8,8 +8,10 @@
       <label-card :tip="post.shareCount" :icon="share"></label-card>      
       <label-card :tip="post.commentCount" :icon="comment"></label-card>      
       <label-card :tip="post.date" :icon="date"></label-card>           
-      <label-card @clickEvent="changeRouter(`/article/edit/${$route.params.id}`)" :action="true" tip="Edit" :icon="edit"></label-card>     
-      <label-card :action="true" tip="Delete" :icon="del"></label-card>         
+      <template v-if="post.isSelf">
+        <label-card @clickEvent="changeRouter(`/article/edit/${$route.params.id}`)" :action="true" tip="Edit" :icon="edit"></label-card>     
+        <label-card :action="true" tip="Delete" :icon="del"></label-card>         
+      </template>
     </div>
     <vue-markdown class="markdown" :source="post.content">{{post.content}}</vue-markdown>
     <article-menu @actionHandler="actionHandler" :state="state"></article-menu>

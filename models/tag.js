@@ -5,6 +5,4 @@ const TagsSchema = new Schema({
   name: { type: String, required: true }
 })
 
-const Tags = mongoose.model('Tags', TagsSchema)
-
-export default Tags
+export default mongoose.model('Tags', TagsSchema)

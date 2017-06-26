@@ -17,6 +17,4 @@ const PostSchema = new Schema({
   thumbUpCount: { type: Number, default: 0 }
 })
 
-const Post = mongoose.model('Post', PostSchema)
-
-export default Post
+export default mongoose.model('Post', PostSchema)

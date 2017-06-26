@@ -22,6 +22,7 @@
   right: 100px;
   top: 50px;
   z-index: 2;
+  cursor: pointer;  
   border-radius: 50%;
   background: {
     color: rgb(0, 219, 139);
@@ -44,7 +45,7 @@
   height: 400px;
   width: 50px;
   right: 110px;
-  top: 60px;  
+  top: 60px;
   div {
     position: absolute;
     left: 0;
@@ -52,6 +53,7 @@
     height: 50px;
     border-radius: 50%;
     background: white;
+    cursor: pointer;  
     background: {
       color: rgb(0, 219, 139);
       repeat:  no-repeat;

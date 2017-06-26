@@ -73,6 +73,7 @@ export default {
       position: absolute;
       right: 0px;
       border-radius: 50%;
+      cursor: pointer;
       &:hover {
         color: #008f5b;
         background-color: #3fff7a;

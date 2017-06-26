@@ -1,11 +1,12 @@
 import BaseResource from './base-resource-service'
 import mongoose from 'mongoose'
 const Collection = mongoose.model('Collection')
+const ThumbUp = mongoose.model('ThumbUp')
 
 class PostResource extends BaseResource {
   query ({ user }) {
     this.filters = this.filters || {}
-    this.filters = Object.assign(this.filters, { "$or": [{ open: true }, { createBy: user._id }]})
+    this.filters = Object.assign(this.filters, { $or: [{ open: true }, { createBy: user._id }]})
     this.listQuery = this.Model.find(this.filters).populate({ path: 'tags comments' }).select(this.selectField).limit(this.limit).skip(this.skip).sort(this.sort)
   }
 
@@ -30,7 +31,7 @@ class PostResource extends BaseResource {
       // await this.Model.findByIdAndUpdate(params.id, {
       //   $inc: { viewCount: 1 }
       // })
-      let entity = await this.Model.findOneAndUpdate({ _id: id, createBy: user._id }, { '$inc': { viewCount: 1 } }).populate({
+      let entity = await this.Model.findOneAndUpdate({ _id: id, $or: [{ open: true }, { createBy: user._id }] }, { $inc: { viewCount: 1 } }).populate({
         path: 'createBy',
         select: 'name'
       }).select(this.selectField)
@@ -39,8 +40,10 @@ class PostResource extends BaseResource {
       }
       let collectCount = await Collection.count({ postId: id, createBy: user._id })
       let isCollected = collectCount ? true : false
+      let thumbUpCount = await ThumbUp.count({ postId: id, createBy: user._id })
+      let isThumbUped = thumbUpCount ? true : false
       let result =  this._mongoIdToWebId(entity)
-      Object.assign(result, { isCollected })
+      Object.assign(result, { isCollected, isThumbUped })
       return result
     } catch (err) {
       throw new Error({ code: 500, msg: err, level: 'error' }) 

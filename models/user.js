@@ -13,6 +13,4 @@ const UsersSchema = new Schema({
   date: { type: Date, default: Date.now() }
 })
 
-const Users = mongoose.model('Users', UsersSchema)
-
-export default Users
+export default mongoose.model('Users', UsersSchema)

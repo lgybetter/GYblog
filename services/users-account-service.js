@@ -28,9 +28,6 @@ const queryUsers = () => {
 }
 
 const findUser = (id, _id) => {
-  if (id !== _id) {
-    throw new Error('can not found other user info')
-  }
   return Users.findById(id).select({
     password: 0
   })

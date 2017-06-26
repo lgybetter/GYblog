@@ -63,6 +63,7 @@ export default {
   async created () {
     await this.getResource({ url: 'post', id: this.$route.params.id })
     this.state.star = this.post.isCollected
+    this.state.thumpUp = this.post.isThumbUped
   },
   computed: {
     ...mapGetters(['post'])
@@ -95,42 +96,46 @@ export default {
     changeRouter (path) {
       this.$router.push(path)
     },
+    actionStart (url, stateName, preState, target) {
+      if (!preState) {
+        this.postResource({
+          url,
+          data: {
+            postId: target
+          }
+        }).then(data => {
+          if (data.id) {
+            this.state[stateName] = true
+          } else {
+            console.log('收藏失败')
+          }
+        }).then(() => {
+          this.getResource({ url: 'post', id: target })
+        })
+      } else {
+        this.deleteResource({
+          url,
+          id: target
+        }).then(data => {
+          if (data.id) {
+            this.state[stateName] = false
+          } else {
+            console.log('取消收藏失败')
+          }
+        }).then(() => {
+          this.getResource({ url: 'post', id: target })
+        })
+      }
+    },
     actionHandler (action) {
       switch (action) {
         case 'thumb-up-action':
+          this.actionStart('thumb-up', 'thumpUp', this.state.thumpUp, this.post.id)
           break
         case 'comment-action':
           break
         case 'star-action':
-          if (!this.state.star) {
-            this.postResource({
-              url: 'collection',
-              data: {
-                postId: this.post.id
-              }
-            }).then(data => {
-              if (data.id) {
-                this.state.star = true
-              } else {
-                console.log('收藏失败')
-              }
-            }).then(() => {
-              this.getResource({ url: 'post', id: this.$route.params.id })
-            })
-          } else {
-            this.deleteResource({
-              url: 'collection',
-              id: this.post.id
-            }).then(data => {
-              if (data.id) {
-                this.state.star = false
-              } else {
-                console.log('取消收藏失败')
-              }
-            }).then(() => {
-              this.getResource({ url: 'post', id: this.$route.params.id })
-            })
-          }
+          this.actionStart('collection', 'star', this.state.star, this.post.id)
           break
         case 'share-action':
           break

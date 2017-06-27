@@ -2,7 +2,7 @@
   <div class="article-box">
     <div class="article-box-container" @click="showArticle(article.id)">
       <div class="image-box">
-        <img :src="articlePricture"/>
+        <img :src="article.icon"/>
       </div>
       <div class="article-text-box">
         <h1>{{article.title}}</h1>
@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import articlePricture from '../assets/images/article-image.jpg'
 import thumbUpIcon from '../assets/images/ic_thumb_up_black_24dp_1x.png'
 import chatIcon from '../assets/images/ic_chat_black_24dp_1x.png'
 import starIcon from '../assets/images/ic_star_black_24dp_1x.png'
@@ -55,8 +54,7 @@ export default {
         chat: chatIcon,
         star: starIcon,
         share: shareIcon
-      },
-      articlePricture: articlePricture
+      }
     }
   }
 }
@@ -70,9 +68,6 @@ export default {
   margin: 20px 20px 20px 20px;
   display: flex;
   flex-direction: row;
-  &:hover {
-    transform: scale(1.1);
-  }
   .article-box-container {
     width: 620px;
     height: 300px;
@@ -87,6 +82,7 @@ export default {
       height: 300px;
       img {
         width: 100%;
+        height: 100%;
       }
     }
     .article-text-box {

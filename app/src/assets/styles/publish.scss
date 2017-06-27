@@ -2,43 +2,64 @@
 
 .publish-view-container {
   text-align: center;
-  .title-submit-box {
+  .article-header {
     display: flex;
-    margin: 0 auto;
     width: 1000px;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-    .title-text {
-      width: 800px;
-      height: 40px;
-      padding: 10px;
-      box-sizing: border-box;
-      outline: none;
-      font-size: 2rem;
-      text-indent: 5px;
-      border-radius: 5px;
-      border: 2px solid rgb(126, 126, 126);
-      &:focus {
-        border: 2px solid rgb(0, 219, 139);
+    height: 100px;
+    margin: 10px 0;
+    .article-icon {
+      position: relative;
+      img {
+        width: 100px;
+        height: 100px;
+      }
+      .file-upload {
+        position: absolute;
+        bottom: 0;
+        right: 0;
       }
     }
-  }
-  .subtitle-text {
-    width: 1000px;
-    box-sizing: border-box;
-    height: 40px;
-    padding: 10px;
-    box-sizing: border-box;
-    outline: none;
-    font-size: 2rem;
-    text-indent: 5px;
-    border-radius: 5px;
-    border: 2px solid rgb(126, 126, 126);
-    margin-bottom: 20px;
-    &:focus {
-      border: 2px solid rgb(0, 219, 139);
+    .article-title {
+      padding: 0 0 0 10px;
+      .title-submit-box {
+        display: flex;
+        margin: 0 auto;
+        width: 890px;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+        .title-text {
+          width: 700px;
+          height: 40px;
+          padding: 10px;
+          box-sizing: border-box;
+          outline: none;
+          font-size: 2rem;
+          text-indent: 5px;
+          border-radius: 5px;
+          border: 2px solid rgb(126, 126, 126);
+          &:focus {
+            border: 2px solid rgb(0, 219, 139);
+          }
+        }
+      }
+      .subtitle-text {
+        width: 890px;
+        box-sizing: border-box;
+        height: 40px;
+        padding: 10px;
+        box-sizing: border-box;
+        outline: none;
+        font-size: 2rem;
+        text-indent: 5px;
+        border-radius: 5px;
+        border: 2px solid rgb(126, 126, 126);
+        margin-bottom: 20px;
+        &:focus {
+          border: 2px solid rgb(0, 219, 139);
+        }
+      }
     }
   }
   .text-box {

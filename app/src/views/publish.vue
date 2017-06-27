@@ -1,12 +1,20 @@
 <template>
   <div class="child-view">
     <div class="publish-view-container">
-      <div class="title-submit-box">
-        <input type="text" class="title-text" v-model="post.title" placeholder="input the title"/>
-        <checkbox :checked="post.open" @change="handleCheck"></checkbox>
-        <input type="submit"  @click="publish" :value="$route.name === 'editArticle' ? 'Save' : 'Publish'" class="button"/>
+      <div class="article-header">
+        <div class="article-icon">
+          <img :src="post.icon"/>
+          <file-upload @uploadSuccess="uploadSuccess" @uploadFail="uploadFail" class="file-upload"></file-upload>
+        </div>
+        <div class="article-title">
+          <div class="title-submit-box">
+            <input type="text" class="title-text" v-model="post.title" placeholder="input the title"/>
+            <checkbox :checked="post.open" @change="handleCheck"></checkbox>
+            <input type="submit"  @click="publish" :value="$route.name === 'editArticle' ? 'Save' : 'Publish'" class="button"/>
+          </div>
+          <input type="text" class="subtitle-text" v-model="post.subTitle" placeholder="input the sub title"/>        
+        </div>
       </div>
-      <input type="text" class="subtitle-text" v-model="post.subTitle" placeholder="input the sub title"/>        
       <textarea class="text-box" @keydown="keyDown" v-model="post.content" placeholder="write the aritcle with markdown and check the toggle button to select whether to open this article"></textarea>
       <div class="label-view">
         <template v-for="(label, index) in labels">
@@ -37,13 +45,15 @@
 
 <script>
 import navgatorColumn from '../components/navigator-column'
+import fileUpload from '../components/file-upload'
 import checkbox from '../components/checkbox'
 import { mapActions } from 'vuex'
 
 export default {
   components: {
     navgatorColumn,
-    checkbox
+    checkbox,
+    fileUpload
   },
   created () {
     if (this.$route.name === 'editArticle') {
@@ -61,7 +71,8 @@ export default {
         title: '',
         subTitle: '',
         content: '',
-        open: false
+        open: false,
+        icon: ''
       },
       currentIndex: 0,
       labels: [
@@ -126,6 +137,12 @@ export default {
     keyDown (event) {
       if (event.keyCode === 9) {
       }
+    },
+    uploadSuccess (url) {
+      this.post.icon = url
+    },
+    uploadFail () {
+      console.log('upload fail')
     }
   }
 }

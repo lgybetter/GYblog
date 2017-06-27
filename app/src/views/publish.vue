@@ -72,7 +72,7 @@ export default {
         subTitle: '',
         content: '',
         open: false,
-        icon: ''
+        icon: 'http://os32fgzvj.bkt.clouddn.com/012489fbdca023b5de1f5ddb41e15f61-head-picture.jpg'
       },
       currentIndex: 0,
       labels: [

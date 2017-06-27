@@ -13,6 +13,9 @@
     <div class="info-btn-container">
       <a class="go-home-btn" @click="routerChange('/')"/>
       <a class="go-github-btn" :href="infomation.github" target="_Blank"/>
+      <template v-if="curUser._id !== infomation._id">
+        <a class="go-follow-btn" @click="followUser"/>
+      </template>
     </div>
   </div>
 </template>
@@ -35,11 +38,16 @@ export default {
     },
     routerChange (router) {
       this.$router.push(router)
+    },
+    followUser () {
+      console.log(this.infomation)
+      console.log(this.userId, 'ddd')
     }
   },
   data () {
     return {
-      hideInfo: hideInfo
+      hideInfo: hideInfo,
+      curUser: JSON.parse(localStorage.getItem('user')) || {}
     }
   }
 }
@@ -108,6 +116,9 @@ export default {
     }
     .go-github-btn {
       background-image:  url('../assets/images/github.png');
+    }
+    .go-follow-btn {
+      background-image: url('../assets/images/follow.png')
     }
   }
 }

@@ -7,7 +7,7 @@ class CollectionResource extends BaseResource {
   query ({ user }) {
     this.filters = this.filters || {}
     this.filters = Object.assign(this.filters, { createBy: user._id })
-    this.listQuery = this.Model.find(this.filters).select(this.selectField).populate({ path: 'tags comments' }).select(this.selectField).limit(this.limit).skip(this.skip).sort(this.sort)
+    this.listQuery = this.Model.find(this.filters).populate('postId createBy').select(this.selectField).populate({ path: 'tags comments' }).select(this.selectField).limit(this.limit).skip(this.skip).sort(this.sort)
   }
 
   async create ({ body, user }) {

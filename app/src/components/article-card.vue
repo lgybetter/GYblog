@@ -70,6 +70,9 @@ export default {
   margin: 20px 20px 20px 20px;
   display: flex;
   flex-direction: row;
+  &:hover {
+    transform: scale(1.1);
+  }
   .article-box-container {
     width: 620px;
     height: 300px;

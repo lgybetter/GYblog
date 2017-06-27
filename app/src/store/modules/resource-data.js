@@ -11,6 +11,10 @@ const state = {
     createBy: {
       name: ''
     }
+  },
+  collections: {
+    objects: [],
+    count: 0
   }
 }
 
@@ -46,7 +50,8 @@ const actions = {
 
 const getters = {
   posts: state => state.posts,
-  post: state => state.post
+  post: state => state.post,
+  collections: state => state.collections
 }
 
 const mutations = {
